@@ -1,0 +1,33 @@
+<h1>Dashboard</h1>
+<hr>
+
+
+<p>
+  This page only shows up if you are logged in.
+</p>
+
+<h4>User info</h4>
+<pre> ... </pre>
+
+<div class="table-responsive">
+  <table class="table table-primary">
+    <thead>
+      <tr>
+        <th class="m-r-12">Codigo de Usuario</th>
+        <th class="m-r-12">Usuario</th>
+        <th scope="col">Rol</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="" *ngFor="let data of users">
+        <td>{{data.confirmed}}</td>
+        <td>{{data.name}}</td>
+        <td>{{data.roles[0].rol}}</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+
+
+<button class="button" (click)="logout()">Logout</button>
