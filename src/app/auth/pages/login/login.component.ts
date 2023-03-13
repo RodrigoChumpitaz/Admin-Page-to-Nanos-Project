@@ -36,7 +36,7 @@ export class LoginComponent implements OnInit{
                 // console.log(resp);
                 const userRol = resp.roles[0].rol;
                 if(userRol === 'admin'){
-                  this.router.navigateByUrl('/dashboard');
+                  this.router.navigateByUrl('/admin');
                 }else{
                   console.log("No eres un usuario administrador");
                 }

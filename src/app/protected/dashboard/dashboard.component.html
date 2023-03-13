@@ -1,33 +1,24 @@
-<h1>Dashboard</h1>
-<hr>
-
-
-<p>
-  This page only shows up if you are logged in.
-</p>
-
-<h4>User info</h4>
-<pre> ... </pre>
-
-<div class="table-responsive">
-  <table class="table table-primary">
-    <thead>
-      <tr>
-        <th class="m-r-12">Codigo de Usuario</th>
-        <th class="m-r-12">Usuario</th>
-        <th scope="col">Rol</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr class="" *ngFor="let data of users">
-        <td>{{data.confirmed}}</td>
-        <td>{{data.name}}</td>
-        <td>{{data.roles[0].rol}}</td>
-      </tr>
-    </tbody>
-  </table>
+<div class="grid-container">
+  <h1 class="mat-h1">Dashboard</h1>
+  <mat-grid-list cols="2" rowHeight="350px">
+    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
+      <mat-card class="dashboard-card">
+        <mat-card-header>
+          <mat-card-title>
+            {{card.title}}
+            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
+              <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu" xPosition="before">
+              <button mat-menu-item>Expand</button>
+              <button mat-menu-item>Remove</button>
+            </mat-menu>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="dashboard-card-content">
+          <div>Card Content Here</div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
 </div>
-
-
-
-<button class="button" (click)="logout()">Logout</button>
