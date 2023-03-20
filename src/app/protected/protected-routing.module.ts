@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { TestingComponent } from './testing/dashboard.component';
 import { NavigationComponent } from './navigation/navigation.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import { CartaComponent } from './carta/carta.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,7 @@ const routes: Routes = [
       { path: '', component: DashboardComponent },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'users', component: TestingComponent },
+      { path: 'carta', component:CartaComponent},
       { path: '**', redirectTo: '' },
     ]
   }
