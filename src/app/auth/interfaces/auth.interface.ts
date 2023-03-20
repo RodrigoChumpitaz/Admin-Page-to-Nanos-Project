@@ -10,17 +10,11 @@ export interface SingupInterface {
 export interface Data {
   name:           string;
   lastname:       string;
-  documentType:   DocumentType;
+  documentType:   string;
   documentNumber: string;
   email:          string;
   password:       string;
-  address:        string;
-  token:          string;
-  confirmed:      boolean;
   roles:          string[];
-  _id:            string;
-  createdAt:      Date;
-  updatedAt:      Date;
 }
 
 export interface DocumentType {

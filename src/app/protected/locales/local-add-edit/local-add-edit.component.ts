@@ -1,0 +1,82 @@
+import { Component, OnInit, Inject } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DistritoResponse } from 'src/app/auth/interfaces/distrito.interface';
+import { Distrito, RegistrarlocalI } from 'src/app/auth/interfaces/local.interface';
+import { LocalService } from 'src/app/auth/services/local.service';
+
+@Component({
+  selector: 'app-local-add-edit',
+  templateUrl: './local-add-edit.component.html',
+  styleUrls: ['./local-add-edit.component.css']
+})
+export class LocalAddEditComponent implements OnInit {
+
+  districts: DistritoResponse []=[];
+
+  formLocal: FormGroup;
+  tituloAccion: string = "Nuevo";
+  botonAccion: string = "Guardar"
+
+  constructor(private dialogoReferencia: MatDialogRef<LocalAddEditComponent>, private fb:FormBuilder, private _localServicio: LocalService, @Inject (MAT_DIALOG_DATA)public dataLocal:RegistrarlocalI) {
+    this.formLocal = this.fb.group({
+      telefono: ['', Validators.required],
+      direccion: ['', Validators.required],
+      distrito: ['', Validators.required]
+    })
+   }
+
+   addEditLocal(){
+    console.log(this.formLocal.value)
+    const modelo: RegistrarlocalI = {
+      _id: this.formLocal.value.id,
+      telefono: this.formLocal.value.telefono,
+      direccion: this.formLocal.value.direccion,
+      distrito: this.formLocal.value.distrito, 
+    }
+    const token: string = localStorage.getItem('token')!;
+    if(this.dataLocal == null){
+      
+      this._localServicio.registrar(modelo,token).subscribe({
+      next: (data)=>{
+        console.log(data)
+      }
+    })
+   }else{
+      const token: string = localStorage.getItem('token')!;
+      console.log(this.dataLocal);
+      this._localServicio.update(modelo,this.dataLocal._id, token).subscribe({
+      next: (data)=>{
+        console.log(data)
+      },
+      error: (err) =>{
+        console.log(err)
+      }
+    })
+   }
+}
+
+  ngOnInit(): void {
+    this.getDistrict(localStorage.getItem('token')!);
+    if(this.dataLocal){
+      this.formLocal.patchValue({
+        id: this.dataLocal._id,
+        telefono: this.dataLocal.telefono,
+        direccion: this.dataLocal.direccion,
+        distrito: this.dataLocal.distrito,
+    })
+      this.tituloAccion = "Editar"
+      this.botonAccion = "Actualizar"
+    }
+  }
+
+  getDistrict(token: string){
+    this._localServicio.getDistricts(token)
+    .subscribe({
+      next: (data)=>{
+        this.districts=data
+        console.log(data)
+      }
+    })
+  }
+}

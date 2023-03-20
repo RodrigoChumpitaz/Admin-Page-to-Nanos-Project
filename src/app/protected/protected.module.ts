@@ -19,10 +19,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
 
+
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 //FORMS
 import { FormsModule } from '@angular/forms';
+
 
 import { ProtectedRoutingModule } from './protected-routing.module';
 import { NavigationComponent } from './navigation/navigation.component';
@@ -31,6 +33,11 @@ import { TestingComponent } from './testing/dashboard.component';
 import { CartaComponent } from './carta/carta.component';
 import { CartaNuevaComponent } from './carta/carta-nueva/carta-nueva.component';
 import { CartaEditComponent } from './carta/carta-edit/carta-edit.component';
+import { UsuarioAddEditComponent } from './testing/usuario-add-edit/usuario-add-edit.component';
+import { LocalesComponent } from './locales/locales.component';
+import { LocalAddEditComponent } from './locales/local-add-edit/local-add-edit.component';
+
+
 
 
 
@@ -42,6 +49,9 @@ import { CartaEditComponent } from './carta/carta-edit/carta-edit.component';
     CartaComponent,
     CartaNuevaComponent,
     CartaEditComponent,
+    UsuarioAddEditComponent,
+    LocalesComponent,
+    LocalAddEditComponent,
   ],
   imports: [
     CommonModule,
@@ -61,10 +71,11 @@ import { CartaEditComponent } from './carta/carta-edit/carta-edit.component';
     MatFormFieldModule,
     ReactiveFormsModule,
     HttpClientModule,
+
     FormsModule,
     
     MatInputModule,
-    
+
     MatProgressSpinnerModule
   ]
 })

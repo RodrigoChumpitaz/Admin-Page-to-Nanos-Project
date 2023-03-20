@@ -1,0 +1,32 @@
+<h1 mat-dialog-title>{{tituloAccion}}Local</h1>
+<div mat-dialog-content>
+  <form [formGroup]="formLocal">
+    <mat-grid-list cols="1" rowHeight="80px">
+      <mat-grid-tile>
+        <mat-form-field appearance="outline">
+          <mat-label>Telefono</mat-label>
+          <input matInput formControlName="telefono" autocomplete="off">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field appearance="outline">
+          <mat-label>Direccion</mat-label>
+          <input matInput formControlName="direccion">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field>
+          <mat-select matInput placeholder="Seleccionar Distrito" formControlName="distrito" name="distrito">
+            <mat-option *ngFor="let distric of districts" [value]="distric.nombre">{{distric.nombre}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+
+    </mat-grid-list>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button mat-dialog-close color="warn">Volver</button>
+  <button mat-raised-button color="primary" (click)="addEditLocal()"
+    [disabled]="formLocal.invalid">{{botonAccion}}</button>
+</div>
