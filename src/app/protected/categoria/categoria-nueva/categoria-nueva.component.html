@@ -1,0 +1,26 @@
+<mat-card class="example-card">
+    <mat-card-header>
+      <div mat-card-avatar class="example-header-image"></div>
+      <mat-card-title class="text-center">Agregar Nueva Categoria</mat-card-title>
+    </mat-card-header>
+    <input #categoryImage (change)="captar()" class="form-control" type="file" name="categoryImage">
+    <div *ngIf="previsualizacion">
+        <img class="img-thumbnail" [src]="previsualizacion">
+    </div>
+    <br>
+    <mat-card-content>
+        <form class="example-form">
+
+            <br>
+            <mat-form-field class="example-full-width">
+                <mat-label>Description</mat-label>
+                <input type="text" matInput [(ngModel)]="description" name="description">
+            </mat-form-field>
+            <br>
+            <br>
+        </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="save()">Guardar</button> 
+    </mat-card-actions>
+  </mat-card>

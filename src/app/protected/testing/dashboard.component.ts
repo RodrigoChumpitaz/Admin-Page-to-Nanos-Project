@@ -80,4 +80,9 @@ export class TestingComponent implements OnInit{
       height: '500px'
     });
   }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
 }

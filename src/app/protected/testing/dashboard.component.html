@@ -38,7 +38,15 @@
 
   
     <h1>Listado de Usuarios</h1>
+    <br>
+    
     <button mat-raised-button color="primary" (click)="dialogoNuevoUsuario()">Nuevo</button>
+    <br>
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+    </mat-form-field>
+    <br>
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 

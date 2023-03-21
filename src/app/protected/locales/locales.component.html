@@ -5,6 +5,13 @@
   <br>
   <div *ngIf="progress==100">
     <button mat-raised-button color="primary" (click)="dialogoNuevoLocal()">Nuevo</button>
+    <br>
+    <br>
+    <mat-form-field>
+      <mat-label>Filter</mat-label>
+      <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+    </mat-form-field>
+    <br>
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
   
       <!--- Note that these columns can be defined in any order.

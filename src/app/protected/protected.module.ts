@@ -36,6 +36,9 @@ import { CartaEditComponent } from './carta/carta-edit/carta-edit.component';
 import { UsuarioAddEditComponent } from './testing/usuario-add-edit/usuario-add-edit.component';
 import { LocalesComponent } from './locales/locales.component';
 import { LocalAddEditComponent } from './locales/local-add-edit/local-add-edit.component';
+import { CategoriaComponent } from './categoria/categoria.component';
+import { CategoriaNuevaComponent } from './categoria/categoria-nueva/categoria-nueva.component';
+import { CategoriaEditComponent } from './categoria/categoria-edit/categoria-edit.component';
 
 
 
@@ -52,6 +55,9 @@ import { LocalAddEditComponent } from './locales/local-add-edit/local-add-edit.c
     UsuarioAddEditComponent,
     LocalesComponent,
     LocalAddEditComponent,
+    CategoriaComponent,
+    CategoriaNuevaComponent,
+    CategoriaEditComponent,
   ],
   imports: [
     CommonModule,
