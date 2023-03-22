@@ -24,17 +24,13 @@ export class TestingComponent implements OnInit{
   displayedColumns: string[] = ['name', 'lastname', 'email','documentNumber','roles'];
 
   dataSource!: MatTableDataSource<Data>;
-  
+
 
   constructor( private router: Router, private authService: AuthService, public dialog: MatDialog ) { }
 
   ngOnInit(): void {
     // this.getUsers();
     this.getAllUsers();
-  }
-
-  logout(){
-    this.router.navigateByUrl('/auth');
   }
 
   /*getUsers(){

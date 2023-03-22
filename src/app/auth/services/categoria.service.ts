@@ -12,7 +12,10 @@ export class CategoriaService {
 
   getAllCategorias(){
     const direccion: string = `${this.url}/category/getCategories`;
-    return this.http.get<CategoriaI[]>(direccion);
+    const headers = new HttpHeaders({
+      'user_token': `${localStorage.getItem('token')}}`
+    })
+    return this.http.get<CategoriaI[]>(direccion, { headers: headers });
   }
 
   registrar(categoria:FormData, token: string):Observable<CategoriaI>{

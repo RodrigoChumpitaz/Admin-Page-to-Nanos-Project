@@ -58,7 +58,10 @@ export class CategoriaComponent implements OnInit {
     this._categoriaService.changeAvailable(this.token, dataCat._id)
       .subscribe({
         next: (rs) =>{
-          console.log(rs)
+          const url= self ? this.router.url : '/admin/categoria';
+          this.router.navigateByUrl('/',{skipLocationChange:true}).then( async ()=>{
+            await this.router.navigate([`/${url}`])
+          })
         },
         error: (err: any) => console.log(err.headers)
       })
@@ -67,6 +70,14 @@ export class CategoriaComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  getState(state: boolean){
+    if(state){
+      return 'paid'
+    }else{
+      return 'invalid'
+    }
   }
 
 }

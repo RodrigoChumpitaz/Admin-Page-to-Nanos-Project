@@ -13,7 +13,7 @@ import { CartaNuevaComponent } from './carta-nueva/carta-nueva.component';
   styleUrls: ['./carta.component.css']
 })
 export class CartaComponent implements OnInit {
-  
+
   token: string = localStorage.getItem('token')!
   progress = 0;
   showData = false;
@@ -32,7 +32,7 @@ export class CartaComponent implements OnInit {
 
     });
     this.getAllcarta();
-    
+
   }
 
   getAllcarta(){
@@ -54,7 +54,10 @@ export class CartaComponent implements OnInit {
     this.cartaService.changeAvailable(this.token, dataCart._id)
       .subscribe({
         next: (rs) =>{
-          console.log(rs)
+          const url= self ? this.router.url : '/admin/categoria';
+          this.router.navigateByUrl('/',{skipLocationChange:true}).then( async ()=>{
+            await this.router.navigate([`/${url}`])
+          })
         },
         error: (err: any) => console.log(err.headers)
       })
@@ -63,6 +66,21 @@ export class CartaComponent implements OnInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  getState(state: boolean){
+    if(state){
+      return 'paid'
+    }else{
+      return 'invalid'
+    }
+  }
+
+  getColorButton(state: boolean){
+    if(state){
+      return 'warn'
+    }
+    return 'primary'
   }
 
 }

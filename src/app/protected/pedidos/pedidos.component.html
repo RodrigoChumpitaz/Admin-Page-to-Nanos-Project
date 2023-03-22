@@ -1,0 +1,68 @@
+<div class="container" style="padding-top:25%;" *ngIf="progress==0">
+  <p class="h1 text-center">Cargando</p>
+  <mat-progress-spinner style="margin:0 auto;" mode="indeterminate"></mat-progress-spinner>
+</div>
+<div *ngIf="progress==100">
+  <br>
+
+  <mat-form-field class="filter">
+    <mat-label>Filter</mat-label>
+    <input matInput  placeholder="Ex. ium" #input>
+  </mat-form-field>
+
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+    <ng-container matColumnDef="client">
+      <th mat-header-cell *matHeaderCellDef>Datos del cliente</th>
+      <td mat-cell *matCellDef="let element">{{element.client.name | titlecase}}  <span class="email">{{element.client.email}}</span></td>
+    </ng-container>
+
+    <ng-container matColumnDef="deliveryDate">
+      <th mat-header-cell *matHeaderCellDef>Fecha de Entrega</th>
+      <td mat-cell *matCellDef="let element">{{element.deliveryDate | date}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef>Estado del pedido</th>
+      <td mat-cell *matCellDef="let element"><h4 [class]="getState(element.status)">{{element.status}}</h4></td>
+    </ng-container>
+
+    <ng-container matColumnDef="imgPrueba">
+      <th mat-header-cell *matHeaderCellDef>Estado del pedido</th>
+      <td mat-cell *matCellDef="let element"><a target="_blank" [href]="element.imgPrueba"><img [src]="element.imgPrueba" width="70px" height="70px"></a></td>
+    </ng-container>
+
+    <ng-container matColumnDef="_id">
+      <!-- <th mat-header-cell *matHeaderCellDef>Observaciones</th> -->
+      <td mat-cell *matCellDef="let element">{{element._id}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="orderDetail">
+      <!-- <th mat-header-cell *matHeaderCellDef>Observaciones</th> -->
+      <td mat-cell *matCellDef="let element">{{element.orderDetail}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="observation">
+      <th mat-header-cell *matHeaderCellDef>Observaciones</th>
+      <td mat-cell *matCellDef="let element">{{element.observation}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="acciones">
+      <th mat-header-cell *matHeaderCellDef> Control </th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button color="primary" (click)="showDetail(element)">
+          <mat-icon>info</mat-icon>
+        </button>
+        <button mat-icon-button color="warn">
+          <mat-icon>block</mat-icon>
+        </button>
+      </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+
+</div>

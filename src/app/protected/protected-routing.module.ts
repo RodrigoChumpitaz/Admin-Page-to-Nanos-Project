@@ -6,6 +6,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { CartaComponent } from './carta/carta.component';
 import { LocalesComponent } from './locales/locales.component';
 import { CategoriaComponent } from './categoria/categoria.component';
+import { PedidosComponent } from './pedidos/pedidos.component';
 
 const routes: Routes = [
   {
@@ -15,9 +16,10 @@ const routes: Routes = [
       { path: '', component: DashboardComponent },
       { path: 'dashboard', component: DashboardComponent },
       { path: 'users', component: TestingComponent },
+      { path: 'pedidos', component: PedidosComponent },
       { path: 'carta', component:CartaComponent},
-      {path: 'locales', component:LocalesComponent},
-      {path: 'categoria', component:CategoriaComponent},
+      { path: 'locales', component:LocalesComponent},
+      { path: 'categoria', component:CategoriaComponent},
       { path: '**', redirectTo: '' },
     ]
   }

@@ -31,3 +31,9 @@
     max-width: 120px;
   }
 }
+
+.button{
+  background-color: rgb(255, 131, 131);
+  border-radius: 15px;
+
+}

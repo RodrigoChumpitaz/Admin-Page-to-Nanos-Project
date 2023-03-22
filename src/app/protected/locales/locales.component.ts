@@ -30,8 +30,7 @@ export class LocalesComponent implements OnInit {
     this.api.getAllLocal(token)
     .subscribe({
       next: (resp) => {
-        console.log(resp);
-          this.local = resp;
+        this.local = resp;
       },
         error: (err) => {
           console.log(err);
@@ -52,13 +51,12 @@ export class LocalesComponent implements OnInit {
   }
 
   dialogoEditarLocal(dataLocal: RegistrarlocalI){
-    console.log(dataLocal)
     this.dialog.open(LocalAddEditComponent,{
       disableClose:true,
-      width: "350px",
+      width: "500px",
       data: dataLocal
     }).afterClosed().subscribe(resultado =>{
-      
+
     })
   }
 

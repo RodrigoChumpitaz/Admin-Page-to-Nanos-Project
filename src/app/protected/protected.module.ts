@@ -39,6 +39,8 @@ import { LocalAddEditComponent } from './locales/local-add-edit/local-add-edit.c
 import { CategoriaComponent } from './categoria/categoria.component';
 import { CategoriaNuevaComponent } from './categoria/categoria-nueva/categoria-nueva.component';
 import { CategoriaEditComponent } from './categoria/categoria-edit/categoria-edit.component';
+import { PedidosComponent } from './pedidos/pedidos.component';
+import { DetallePedidoComponent } from './pedidos/detalle-pedido/detalle-pedido.component';
 
 
 
@@ -58,6 +60,8 @@ import { CategoriaEditComponent } from './categoria/categoria-edit/categoria-edi
     CategoriaComponent,
     CategoriaNuevaComponent,
     CategoriaEditComponent,
+    PedidosComponent,
+    DetallePedidoComponent,
   ],
   imports: [
     CommonModule,
