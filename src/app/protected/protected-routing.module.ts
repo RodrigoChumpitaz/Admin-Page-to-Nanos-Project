@@ -7,6 +7,7 @@ import { CartaComponent } from './carta/carta.component';
 import { LocalesComponent } from './locales/locales.component';
 import { CategoriaComponent } from './categoria/categoria.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
+import { UsuarioComponent } from './usuario/usuario.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
       { path: 'carta', component:CartaComponent},
       { path: 'locales', component:LocalesComponent},
       { path: 'categoria', component:CategoriaComponent},
+      {path: 'usuario', component:UsuarioComponent},
       { path: '**', redirectTo: '' },
     ]
   }

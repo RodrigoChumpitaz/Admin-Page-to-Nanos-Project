@@ -3,13 +3,13 @@
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title class="text-center">Editar la carta</mat-card-title>
     </mat-card-header>
-    <input #cartImage (change)="captar()" class="form-control" type="file" name="cartImage">
+    <input #cartImage (change)="captar()" class="form-control" type="file" name="cartImage" style="margin: 10px;">
     <div *ngIf="previsualizacion">
         <img class="img-thumbnail" [src]="previsualizacion">
     </div>
     <br>
     <mat-card-content>
-        <form class="example-form" [formGroup]="formularioEdit">
+        <form class="example-form" [formGroup]="formularioEdit" style="margin: 10px;">
             <input type="hidden" name="_id" formControlName="_id">
             <mat-form-field class="example-full-width">
                 <mat-label>Plato</mat-label>

@@ -3,15 +3,17 @@
     <mat-progress-spinner style="margin:0 auto;" mode="indeterminate"></mat-progress-spinner>
   </div>
   <div *ngIf="progress==100">
+
+    <br>
+    <button style="margin-left: 3rem;" mat-raised-button color="primary" (click)="nuevaCategoria()">Nueva Categoria<mat-icon>add</mat-icon></button>
     <br>
 
-    <button mat-raised-button color="primary" (click)="nuevaCategoria()">Nueva Categoria<mat-icon>add</mat-icon></button>
     <br>
-
-    <mat-form-field>
+    <mat-form-field class="filter">
       <mat-label>Filter</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
     </mat-form-field>
+    <br>
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 

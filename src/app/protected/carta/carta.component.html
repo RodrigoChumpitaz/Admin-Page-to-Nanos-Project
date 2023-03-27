@@ -5,14 +5,15 @@
 
   <div *ngIf="progress==100" class="container">
 
-    <hr>
-
-    <button mat-raised-button color="primary" (click)="nuevaCarta()">Nueva Carta<mat-icon>add</mat-icon></button>
+    <button mat-raised-button style="margin-left: 3rem;" color="primary" (click)="nuevaCarta()">Nueva Carta<mat-icon>add</mat-icon></button>
     <br>
-    <mat-form-field>
+
+    <br>
+    <mat-form-field class="filter">
       <mat-label>Filter</mat-label>
       <input matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
     </mat-form-field>
+    <br>
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 

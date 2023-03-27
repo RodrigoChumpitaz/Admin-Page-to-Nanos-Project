@@ -1,7 +1,7 @@
 <mat-card class="example-card">
     <mat-card-header>
       <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title class="text-center">Editar la carta</mat-card-title>
+      <mat-card-title class="text-center">Editar la Categoria</mat-card-title>
     </mat-card-header>
     <input #categoryImage (change)="captar()" class="form-control" type="file" name="categoryImage">
     <div *ngIf="previsualizacion">
@@ -9,7 +9,7 @@
     </div>
     <br>
     <mat-card-content>
-        <form class="example-form" [formGroup]="formularioEdit">
+        <form class="example-form" [formGroup]="formularioEdit" style="margin: 10px;">
             <input type="hidden" name="slug" formControlName="slug">
             <!-- <mat-form-field class="example-full-width">
                 <input type="text" formControlName="name" matInput  name="name">

@@ -41,6 +41,8 @@ import { CategoriaNuevaComponent } from './categoria/categoria-nueva/categoria-n
 import { CategoriaEditComponent } from './categoria/categoria-edit/categoria-edit.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
 import { DetallePedidoComponent } from './pedidos/detalle-pedido/detalle-pedido.component';
+import { UsuarioComponent } from './usuario/usuario.component';
+import { UserAddEditComponent } from './usuario/user-add-edit/user-add-edit.component';
 
 
 
@@ -62,6 +64,8 @@ import { DetallePedidoComponent } from './pedidos/detalle-pedido/detalle-pedido.
     CategoriaEditComponent,
     PedidosComponent,
     DetallePedidoComponent,
+    UsuarioComponent,
+    UserAddEditComponent,
   ],
   imports: [
     CommonModule,
