@@ -70,5 +70,9 @@ export class AuthService {
       'Authorization': `Bearer ${token}`
     });
     return this.http.get<DocumentType[]>(url,{ headers: headers});
-  } 
+  }
+  
+  getToken(){
+    return localStorage.getItem('token');
+  }
 }

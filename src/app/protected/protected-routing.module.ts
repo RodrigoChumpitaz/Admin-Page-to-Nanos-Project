@@ -8,11 +8,13 @@ import { LocalesComponent } from './locales/locales.component';
 import { CategoriaComponent } from './categoria/categoria.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
 import { UsuarioComponent } from './usuario/usuario.component';
+import { AuthGuard } from '../guards/auth.guard';
 
 const routes: Routes = [
   {
     path: '',
     component: NavigationComponent,
+    canActivate:[AuthGuard],
     children: [
       { path: '', component: DashboardComponent },
       { path: 'dashboard', component: DashboardComponent },

@@ -20,6 +20,7 @@ export class NavigationComponent {
   constructor(private breakpointObserver: BreakpointObserver, private router: Router) {}
 
   logout(){
+    localStorage.removeItem('token');
     this.router.navigateByUrl('/auth');
   }
 }
