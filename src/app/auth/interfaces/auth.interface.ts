@@ -8,6 +8,7 @@ export interface SingupInterface {
 }
 
 export interface Data {
+  _id:            string;
   name:           string;
   lastname:       string;
   documentType:   string;
@@ -15,7 +16,23 @@ export interface Data {
   email:          string;
   password:       string;
   roles:          string[];
+  status?:         boolean | any;
 }
+
+export interface Dat {
+  _id?:            string | any;
+  name?:           string | any;
+  lastname?:       string | any;
+  documentType?:   string | any;
+  documentNumber?: string | any;
+  email?:          string | any;
+  password?:       string | any;
+  roles?:          string[] | any;
+  status?:          boolean | any;
+}
+
+
+
 
 export interface DocumentType {
   _id:       string;

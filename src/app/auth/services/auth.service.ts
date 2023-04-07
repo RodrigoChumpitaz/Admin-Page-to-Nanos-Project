@@ -75,4 +75,21 @@ export class AuthService {
   getToken(){
     return localStorage.getItem('token');
   }
+
+  update(modelo: Data, id: string, token: string):Observable<Data[]>{
+    const direccion: string = `${this.baseUrl}/users/special/update-user/${id}`;
+    const headers = new HttpHeaders({
+      //'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token}`
+    })
+    return this.http.patch<Data[]>(direccion,modelo,{headers:headers});
+  }
+
+  changeAvailable(token: string, _id: string){
+    const baseurl: string = `${this.baseUrl}/users/special/change-user-status/${_id}`;
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.patch(baseurl, null, {headers:headers})
+  }
 }

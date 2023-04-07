@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { MatTableDataSource } from '@angular/material/table';
 import { AuthService } from 'src/app/auth/services/auth.service';
-import { Data, ProfileInterface } from 'src/app/auth/interfaces/auth.interface';
+import { Data, ProfileInterface, Dat } from 'src/app/auth/interfaces/auth.interface';
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 import { UserAddEditComponent } from './user-add-edit/user-add-edit.component';
@@ -15,12 +15,13 @@ import { UserAddEditComponent } from './user-add-edit/user-add-edit.component';
 })
 export class UsuarioComponent implements OnInit {
 
+  token: string = localStorage.getItem('token')!
   progress = 0;
 
   users: ProfileInterface[] = [];
   user: Data[] = [];
 
-  displayedColumns: string[] = ['name', 'lastname', 'email','documentNumber','roles'];
+  displayedColumns: string[] = ['name', 'lastname', 'email','documentNumber','roles','status','acciones'];
 
   dataSource!: MatTableDataSource<Data>;
 
@@ -56,9 +57,42 @@ export class UsuarioComponent implements OnInit {
     });
   }
 
+  dialogoEditarUsuario(dataUser:Data){
+    this.dialog.open(UserAddEditComponent,{
+      width: '700px',
+      height: '500px',
+      data: dataUser
+    }).afterClosed().subscribe(resultado => {
+
+    })
+  }
+
+  inactiveUser(dataDat: Dat){
+    this.authService.changeAvailable(this.token, dataDat._id)
+      .subscribe({
+        next: (rs) =>{
+          const url= self ? this.router.url : '/admin/usuario';
+          this.router.navigateByUrl('/',{skipLocationChange:true}).then( async ()=>{
+            await this.router.navigate([`/${url}`])
+          })
+        },
+        error: (err: any) => console.log(err.headers)
+      })
+  }
+
+  getState(status: boolean){
+    if(status){
+      return 'paid'
+    }else{
+      return 'invalid'
+    }
+  }
+
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
+
+
 
 }

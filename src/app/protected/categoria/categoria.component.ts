@@ -79,5 +79,6 @@ export class CategoriaComponent implements OnInit {
       return 'invalid'
     }
   }
+  
 
 }

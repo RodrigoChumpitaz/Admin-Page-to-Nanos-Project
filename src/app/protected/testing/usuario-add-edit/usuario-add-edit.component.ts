@@ -36,6 +36,7 @@ export class UsuarioAddEditComponent implements OnInit {
     
     console.log(this.formUsuario.value)
     const modelo: Data ={
+      _id: this.formUsuario.value.id,
       name: this.formUsuario.value.name,
       lastname: this.formUsuario.value.lastname,
       email: this.formUsuario.value.email,
