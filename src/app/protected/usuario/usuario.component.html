@@ -75,10 +75,10 @@
             <button mat-icon-button color="primary" (click)="dialogoEditarUsuario(element)">
               <mat-icon>edit</mat-icon>
             </button>
-            <button mat-icon-button color="warn" *ngIf="element.status === true" (click)="inactiveUser(element)">
+            <button mat-icon-button color="warn" *ngIf="element.status === 'active'" (click)="inactiveUser(element)">
               <mat-icon>block</mat-icon>
             </button>
-            <button mat-icon-button class="color" *ngIf="element.status === false" (click)="inactiveUser(element)">
+            <button mat-icon-button class="color" *ngIf="element.status === 'inactive'" (click)="inactiveUser(element)">
               <mat-icon>check</mat-icon>
             </button>
           </td>

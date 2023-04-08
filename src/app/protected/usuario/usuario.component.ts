@@ -80,8 +80,8 @@ export class UsuarioComponent implements OnInit {
       })
   }
 
-  getState(status: boolean){
-    if(status){
+  getState(status: string){
+    if(status == "active"){
       return 'paid'
     }else{
       return 'invalid'

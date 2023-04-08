@@ -64,6 +64,9 @@ export class PedidosComponent implements OnInit {
 
       return 'toDelivery';
     }
+    if(state === 'Entregado'){
+      return 'send'
+    }
     return 'invalid';
   }
 

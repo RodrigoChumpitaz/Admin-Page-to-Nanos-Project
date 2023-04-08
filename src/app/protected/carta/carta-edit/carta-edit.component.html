@@ -3,35 +3,42 @@
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title class="text-center">Editar la carta</mat-card-title>
     </mat-card-header>
-    <input #cartImage (change)="captar()" class="form-control" type="file" name="cartImage" style="margin: 10px;">
+    <input #cartImage (change)="captar()" class="form-control" type="file" name="cartImage" style="margin: 40px;">
     <div *ngIf="previsualizacion">
         <img class="img-thumbnail" [src]="previsualizacion">
     </div>
     <br>
     <mat-card-content>
         <form class="example-form" [formGroup]="formularioEdit" style="margin: 10px;">
+          <mat-grid-list cols="2" rowHeight="80px">
             <input type="hidden" name="_id" formControlName="_id">
-            <mat-form-field class="example-full-width">
+            <mat-grid-tile>
+              <mat-form-field class="example-full-width">
                 <mat-label>Plato</mat-label>
                 <input type="text" formControlName="name" matInput  name="name">
-            </mat-form-field>
-            <br>
-            <mat-form-field class="example-full-width">
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+              <mat-form-field class="example-full-width">
                 <mat-label>Description</mat-label>
                 <input type="text" matInput formControlName="description"  name="description">
-            </mat-form-field>
-            <br>
-            <mat-form-field class="example-full-width">
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
+              <mat-form-field class="example-full-width">
                 <mat-label>Precio</mat-label>
                 <input type="number" formControlName="price" matInput  name="price">
-            </mat-form-field>
-            <br>
+              </mat-form-field>
+            </mat-grid-tile>
+            <mat-grid-tile>
             <mat-form-field appearance="fill">
                 <mat-label>Categoria</mat-label>
                 <mat-select matInput #category1 formControlName="category" placeholder="Seleccionar Categoria"  name="category">
                   <mat-option  *ngFor="let categoria of categoriaList" [value]="categoria.description">{{categoria.description}}</mat-option>
                 </mat-select>
               </mat-form-field>
+            </mat-grid-tile>
+          </mat-grid-list>
         </form>
     </mat-card-content>
     <mat-card-actions>

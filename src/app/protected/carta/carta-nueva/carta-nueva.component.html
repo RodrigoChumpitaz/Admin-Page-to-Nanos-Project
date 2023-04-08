@@ -5,7 +5,7 @@
     <mat-card-title class="text-center">Agregar Nueva Carta</mat-card-title>
   </mat-card-header>
 
-  <input #cartImage (change)="captar()" class="form-control" type="file" name="cartImage" style="margin: 10px;">
+  <input #cartImage (change)="captar()" class="form-control" type="file" name="cartImage" style="margin: 30px;">
 
   <div *ngIf="previsualizacion">
     <img class="img-thumbnail" [src]="previsualizacion">
@@ -13,33 +13,39 @@
 
   <br>
 
-    <mat-card-content>
+   
       <form class="example-form">
-        <mat-form-field class="example-full-width" style="margin: 10px;">
-          <mat-label>Plato</mat-label>
-          <input type="text" matInput [(ngModel)]="name" name="name">
-        </mat-form-field>
-        <br>
-        <mat-form-field class="example-full-width" appearance="outline">
-          <mat-label>Description</mat-label>
-          <input type="text" matInput [(ngModel)]="description" name="description">
-        </mat-form-field>
-        <br>
-        <mat-form-field class="example-full-width" appearance="outline">
-          <mat-label>Precio</mat-label>
-          <input type="number" matInput [(ngModel)]="price" name="price">
-        </mat-form-field>
-        <br>
-        <mat-form-field appearance="fill">
-          <mat-label>Categoria</mat-label>
-          <mat-select matInput placeholder="Seleccionar Categoria" [(ngModel)]="category" name="category">
-
-            <mat-option *ngFor="let categoria of categoriaList"
-              [value]="categoria.description">{{categoria.description}}</mat-option>
-          </mat-select>
-        </mat-form-field>
+        <mat-grid-list cols="2" rowHeight="80px">
+          <mat-grid-tile>
+            <mat-form-field appearance="outline">
+              <mat-label>Plato</mat-label>
+              <input type="text" matInput [(ngModel)]="name" name="name">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="outline">
+              <mat-label>Descripcion</mat-label>
+              <input type="text" matInput [(ngModel)]="description" name="description">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="outline">
+              <mat-label>Precio</mat-label>
+              <input type="text" matInput [(ngModel)]="price" name="price">
+            </mat-form-field>
+          </mat-grid-tile>
+          <mat-grid-tile>
+            <mat-form-field appearance="outline">
+              <mat-label>Categoria</mat-label>
+              <mat-select matInput placeholder="Seleccionar Categoria" [(ngModel)]="category" name="category">
+                <mat-option *ngFor="let categoria of categoriaList"
+                  [value]="categoria.description">{{categoria.description}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </mat-grid-tile>
+        </mat-grid-list>
       </form>
-    </mat-card-content>
+    
 
   <mat-card-actions>
     <button mat-button (click)="save()">Guardar</button>

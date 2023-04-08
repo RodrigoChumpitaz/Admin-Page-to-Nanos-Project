@@ -16,7 +16,7 @@ export interface Data {
   email:          string;
   password:       string;
   roles:          string[];
-  status?:         boolean | any;
+  status?:        string;
 }
 
 export interface Dat {
@@ -28,7 +28,7 @@ export interface Dat {
   email?:          string | any;
   password?:       string | any;
   roles?:          string[] | any;
-  status?:          boolean | any;
+  status?:          string | any;
 }
 
 

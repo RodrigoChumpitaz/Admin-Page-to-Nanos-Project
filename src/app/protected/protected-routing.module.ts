@@ -18,7 +18,6 @@ const routes: Routes = [
     children: [
       { path: '', component: DashboardComponent },
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'users', component: TestingComponent },
       { path: 'pedidos', component: PedidosComponent },
       { path: 'carta', component:CartaComponent},
       { path: 'locales', component:LocalesComponent},

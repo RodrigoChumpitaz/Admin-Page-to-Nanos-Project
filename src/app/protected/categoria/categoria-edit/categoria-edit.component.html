@@ -3,24 +3,23 @@
       <div mat-card-avatar class="example-header-image"></div>
       <mat-card-title class="text-center">Editar la Categoria</mat-card-title>
     </mat-card-header>
-    <input #categoryImage (change)="captar()" class="form-control" type="file" name="categoryImage">
+    <input #categoryImage (change)="captar()" class="form-control" type="file" name="categoryImage" style="margin: 15px;">
     <div *ngIf="previsualizacion">
         <img class="img-thumbnail" [src]="previsualizacion">
     </div>
     <br>
     <mat-card-content>
         <form class="example-form" [formGroup]="formularioEdit" style="margin: 10px;">
-            <input type="hidden" name="slug" formControlName="slug">
-            <!-- <mat-form-field class="example-full-width">
-                <input type="text" formControlName="name" matInput  name="name">
-            </mat-form-field> -->
+            <mat-grid-list cols="2" rowHeight="80px">
+                <input type="hidden" name="slug" formControlName="slug">
             <br>
+            <mat-grid-tile>
             <mat-form-field class="example-full-width">
                 <mat-label>Description</mat-label>
-                <input type="text" matInput formControlName="description"  name="description">
-            </mat-form-field>
-            <br>
-            <br>
+                    <input type="text" matInput formControlName="description"  name="description">
+                </mat-form-field>
+            </mat-grid-tile>
+            </mat-grid-list>
         </form>
     </mat-card-content>
     <mat-card-actions>

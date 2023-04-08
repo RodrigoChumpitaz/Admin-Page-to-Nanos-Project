@@ -39,7 +39,7 @@ export class CategoriaComponent implements OnInit {
 
   nuevaCategoria(){
     this.dialog.open(CategoriaNuevaComponent,{
-      width: '750px',
+      width: '500px',
       height: '450px'
 
     });
@@ -48,7 +48,7 @@ export class CategoriaComponent implements OnInit {
 
   editarcategoria(dataCat:Cat){
     this.dialog.open(CategoriaEditComponent,{
-        width: '750px',
+        width: '500px',
         height: '450px',
         data: dataCat
     })

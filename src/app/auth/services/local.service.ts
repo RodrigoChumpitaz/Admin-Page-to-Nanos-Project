@@ -50,4 +50,12 @@ export class LocalService {
     return this.http.patch<RegistrarlocalI[]>(direccion,modelo,{headers:headers});
   }
 
+  changeAvailable(token: string, _id: string){
+    const baseurl: string = `${this.baseUrl}/commons/inactiveLocal/${_id}`;
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`
+    });
+    return this.http.patch(baseurl, null, {headers:headers});
+  }
+
 }

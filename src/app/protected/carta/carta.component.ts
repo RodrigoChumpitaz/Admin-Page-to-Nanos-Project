@@ -27,8 +27,8 @@ export class CartaComponent implements OnInit {
   }
   nuevaCarta() {
     this.dialog.open(CartaNuevaComponent,{
-      width: '1000px',
-      height: '700px'
+      width: '600px',
+      height: '400px'
 
     });
     this.getAllcarta();
@@ -44,8 +44,8 @@ export class CartaComponent implements OnInit {
   }
   editarcarta(dataCart:Cart){
     this.dialog.open(CartaEditComponent,{
-        width: '1000px',
-        height: '700px',
+        width: '600px',
+        height: '600px',
         data: dataCart
     })
   }
@@ -54,7 +54,7 @@ export class CartaComponent implements OnInit {
     this.cartaService.changeAvailable(this.token, dataCart._id)
       .subscribe({
         next: (rs) =>{
-          const url= self ? this.router.url : '/admin/categoria';
+          const url= self ? this.router.url : '/admin/carta';
           this.router.navigateByUrl('/',{skipLocationChange:true}).then( async ()=>{
             await this.router.navigate([`/${url}`])
           })

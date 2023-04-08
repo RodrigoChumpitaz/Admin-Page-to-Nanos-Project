@@ -3,6 +3,16 @@ export interface RegistrarlocalI {
     distrito:  Distrito;
     telefono:  string;
     direccion: string;
+    active?:    boolean
+
+}
+
+export interface RegistrarlocaI {
+    _id?:       string | any;
+    distrito?:  Distrito | any;
+    telefono?:  string | any;
+    direccion?: string | any;
+    active?:    boolean | any;
 
 }
 
