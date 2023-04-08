@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { RegistrarlocalI, RegistrarlocaI } from 'src/app/auth/interfaces/local.interface';
 import { LocalService } from 'src/app/auth/services/local.service';
 import { LocalAddEditComponent } from './local-add-edit/local-add-edit.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-locales',
@@ -65,8 +66,41 @@ export class LocalesComponent implements OnInit {
   inactiveLocal(dataLoc: RegistrarlocaI){
     this.api.changeAvailable(this.token, dataLoc._id)
       .subscribe({
-        next: (rs) =>{
+        next: (rs:any) =>{
           const url= self ? this.router.url : '/admin/locales';
+          if(rs.message==="Local active"){
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 5000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+            })
+            Toast.fire({
+              icon: 'error',
+              title: 'se deshabilito el local seleccionado',
+            })
+          }else if(rs.message==="Local inactive"){
+            const Toast1 = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 5000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+            })
+            Toast1.fire({
+              icon: 'info',
+              title: 'se habilito la carta seleccionada',
+            })
+          }
           this.router.navigateByUrl('/',{skipLocationChange:true}).then( async ()=>{
             await this.router.navigate([`/${url}`])
           })

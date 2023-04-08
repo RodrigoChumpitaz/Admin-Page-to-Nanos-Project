@@ -6,6 +6,7 @@ import { Cart, Carta } from 'src/app/auth/interfaces/carta.interface';
 import { CartaService } from 'src/app/auth/services/carta.service';
 import { CartaEditComponent } from './carta-edit/carta-edit.component';
 import { CartaNuevaComponent } from './carta-nueva/carta-nueva.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-carta',
@@ -53,8 +54,41 @@ export class CartaComponent implements OnInit {
   inactiveCart(dataCart: Cart){
     this.cartaService.changeAvailable(this.token, dataCart._id)
       .subscribe({
-        next: (rs) =>{
+        next: (rs:any) =>{
           const url= self ? this.router.url : '/admin/carta';
+          if(rs.message==="Cart disabled succesfully"){
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 5000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+            })
+            Toast.fire({
+              icon: 'error',
+              title: 'se deshabilito la carta seleccionada',
+            })
+          }else if(rs.message==="Cart enabled succesfully"){
+            const Toast1 = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 5000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+            })
+            Toast1.fire({
+              icon: 'info',
+              title: 'se habilito la carta seleccionada',
+            })
+          }
           this.router.navigateByUrl('/',{skipLocationChange:true}).then( async ()=>{
             await this.router.navigate([`/${url}`])
           })

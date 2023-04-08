@@ -5,6 +5,7 @@ import { CategoriaI } from 'src/app/auth/interfaces/categoria.interface';
 import { CartaService } from 'src/app/auth/services/carta.service';
 import { CategoriaService } from 'src/app/auth/services/categoria.service';
 import { FormBuilder } from '@angular/forms';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-carta-edit',
@@ -61,6 +62,21 @@ export class CartaEditComponent implements OnInit {
       .subscribe({
         next: (rs) => {
           console.log(rs);
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+          Toast.fire({
+            icon: 'success',
+            title: 'se edito el la carta selecionada'
+          })
         },
         error: err => console.log(err)
       })

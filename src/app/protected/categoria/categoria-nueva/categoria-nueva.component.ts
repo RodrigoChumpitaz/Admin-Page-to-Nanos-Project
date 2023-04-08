@@ -2,6 +2,7 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators,FormControl } from '@angular/forms';
 import { CategoriaI } from 'src/app/auth/interfaces/categoria.interface';
 import { CategoriaService } from 'src/app/auth/services/categoria.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-categoria-nueva',
@@ -39,8 +40,25 @@ export class CategoriaNuevaComponent implements OnInit {
     .subscribe({
       next: (data) =>{
         console.log(data);
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+        
+        Toast.fire({
+          icon: 'success',
+          title: 'se añadio una nueva categoria'
+        })
       },
       error: (err) => console.log(err)
+      
     })
   }
 

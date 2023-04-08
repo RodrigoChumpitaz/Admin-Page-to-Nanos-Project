@@ -6,6 +6,7 @@ import { Data, ProfileInterface, Dat } from 'src/app/auth/interfaces/auth.interf
 import {MatDialog, MAT_DIALOG_DATA} from '@angular/material/dialog';
 
 import { UserAddEditComponent } from './user-add-edit/user-add-edit.component';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -70,8 +71,41 @@ export class UsuarioComponent implements OnInit {
   inactiveUser(dataDat: Dat){
     this.authService.changeAvailable(this.token, dataDat._id)
       .subscribe({
-        next: (rs) =>{
+        next: (rs:any) =>{
           const url= self ? this.router.url : '/admin/usuario';
+          if(rs.msg==="User status changed to inactive"){
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 5000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+            })
+            Toast.fire({
+              icon: 'error',
+              title: 'se deshabilito el usuario seleccionado',
+            })
+          }else if(rs.msg==="User status changed to active"){
+            const Toast1 = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 5000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+            })
+            Toast1.fire({
+              icon: 'info',
+              title: 'se habilito el usuario seleccionado',
+            })
+          }
           this.router.navigateByUrl('/',{skipLocationChange:true}).then( async ()=>{
             await this.router.navigate([`/${url}`])
           })

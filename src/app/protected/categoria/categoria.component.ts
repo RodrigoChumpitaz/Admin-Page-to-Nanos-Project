@@ -6,6 +6,7 @@ import { CategoriaI,Cat } from 'src/app/auth/interfaces/categoria.interface';
 import { CategoriaService } from 'src/app/auth/services/categoria.service';
 import { CategoriaEditComponent } from './categoria-edit/categoria-edit.component';
 import { CategoriaNuevaComponent } from './categoria-nueva/categoria-nueva.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-categoria',
@@ -57,8 +58,42 @@ export class CategoriaComponent implements OnInit {
   inactiveCategoria(dataCat: Cat){
     this._categoriaService.changeAvailable(this.token, dataCat._id)
       .subscribe({
-        next: (rs) =>{
+        next: (rs:any) =>{
           const url= self ? this.router.url : '/admin/categoria';
+          if(rs.message==="Category inactivated"){
+            const Toast = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 5000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+            })
+            Toast.fire({
+              icon: 'error',
+              title: 'se deshabilito la categoria seleccionada',
+            })
+          }else{
+            const Toast1 = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 5000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+            })
+            Toast1.fire({
+              icon: 'info',
+              title: 'se habilito la categoria seleccionada',
+            })
+          }
+          
           this.router.navigateByUrl('/',{skipLocationChange:true}).then( async ()=>{
             await this.router.navigate([`/${url}`])
           })

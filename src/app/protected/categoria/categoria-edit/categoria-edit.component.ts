@@ -3,6 +3,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { FormBuilder } from '@angular/forms';
 import { CategoriaService } from 'src/app/auth/services/categoria.service';
 import { Cat } from 'src/app/auth/interfaces/categoria.interface';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-categoria-edit',
@@ -44,6 +45,22 @@ export class CategoriaEditComponent implements OnInit {
       .subscribe({
         next: (rs) => {
           console.log(rs);
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+          
+          Toast.fire({
+            icon: 'success',
+            title: 'se edito la categoria selecionada'
+          })
         },
         error: err => console.log(err)
       })

@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { DistritoResponse } from 'src/app/auth/interfaces/distrito.interface';
 import { Distrito, RegistrarlocalI } from 'src/app/auth/interfaces/local.interface';
 import { LocalService } from 'src/app/auth/services/local.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-local-add-edit',
@@ -40,6 +41,22 @@ export class LocalAddEditComponent implements OnInit {
       this._localServicio.registrar(modelo,token).subscribe({
       next: (data)=>{
         console.log(data)
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+        
+        Toast.fire({
+          icon: 'success',
+          title: 'se añadio un nuevo local'
+        })
       }
     })
    }else{
@@ -48,10 +65,27 @@ export class LocalAddEditComponent implements OnInit {
       this._localServicio.update(modelo,this.dataLocal._id, token).subscribe({
       next: (data)=>{
         console.log(data)
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+        
+        Toast.fire({
+          icon: 'success',
+          title: 'se edito el local selecionado'
+        })
       },
       error: (err) =>{
         console.log(err)
       }
+      
     })
    }
 }

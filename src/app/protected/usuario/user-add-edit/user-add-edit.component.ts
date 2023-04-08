@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Rol, DocumentType, Data } from 'src/app/auth/interfaces/auth.interface';
 import { AuthService  } from 'src/app/auth/services/auth.service';
+import Swal from 'sweetalert2';
 
 
 
@@ -50,6 +51,22 @@ export class UserAddEditComponent implements OnInit {
       this._autService.registrar(modelo,token).subscribe({
         next:(data)=>{
           console.log(data)
+          const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+          
+          Toast.fire({
+            icon: 'success',
+            title: 'se añadio un nuevo usuario'
+          })
         }
       })
     }else{
@@ -58,6 +75,22 @@ export class UserAddEditComponent implements OnInit {
       this._autService.update(modelo,this.dataUser._id, token).subscribe({
       next: (data)=>{
         console.log(data)
+        const Toast = Swal.mixin({
+          toast: true,
+          position: 'top-end',
+          showConfirmButton: false,
+          timer: 3000,
+          timerProgressBar: true,
+          didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+          }
+        })
+        
+        Toast.fire({
+          icon: 'success',
+          title: 'se edito el usuario selecionado'
+        })
       },
       error: (err) =>{
         console.log(err)
