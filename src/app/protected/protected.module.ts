@@ -43,6 +43,7 @@ import { PedidosComponent } from './pedidos/pedidos.component';
 import { DetallePedidoComponent } from './pedidos/detalle-pedido/detalle-pedido.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { UserAddEditComponent } from './usuario/user-add-edit/user-add-edit.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 
 
@@ -90,7 +91,10 @@ import { UserAddEditComponent } from './usuario/user-add-edit/user-add-edit.comp
     
     MatInputModule,
 
-    MatProgressSpinnerModule
+    MatProgressSpinnerModule,
+
+    /* se agrego */
+    NgxChartsModule
   ]
 })
 export class ProtectedModule { }
