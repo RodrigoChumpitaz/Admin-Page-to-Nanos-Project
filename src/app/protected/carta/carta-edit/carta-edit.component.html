@@ -5,11 +5,11 @@
     </mat-card-header>
     <input #cartImage (change)="captar()" class="form-control" type="file" name="cartImage" style="margin: 40px;">
     <div *ngIf="previsualizacion">
-        <img class="img-thumbnail" [src]="previsualizacion">
+        <img class="img" [src]="previsualizacion">
     </div>
     <br>
     <mat-card-content>
-        <form class="example-form" [formGroup]="formularioEdit" style="margin: 10px;">
+        <form ngNoForm class="example-form" [formGroup]="formularioEdit" style="margin: 10px;">
           <mat-grid-list cols="2" rowHeight="80px">
             <input type="hidden" name="_id" formControlName="_id">
             <mat-grid-tile>
@@ -33,15 +33,19 @@
             <mat-grid-tile>
             <mat-form-field appearance="fill">
                 <mat-label>Categoria</mat-label>
-                <mat-select matInput #category1 formControlName="category" placeholder="Seleccionar Categoria"  name="category">
+                <mat-select matInput name="category" [(ngModel)]="selectedOption" [formControl]="control" formControlName="category" matAutocompleteOrigin placeholder="Seleccionar Categoria">
                   <mat-option  *ngFor="let categoria of categoriaList" [value]="categoria.description">{{categoria.description}}</mat-option>
                 </mat-select>
+                <mat-autocomplete #auto="matAutocomplete">
+                  <mat-option *ngFor="let categoria of categoriaList" [value]="categoria.description">{{categoria.description}}</mat-option>
+                </mat-autocomplete>
               </mat-form-field>
             </mat-grid-tile>
           </mat-grid-list>
         </form>
     </mat-card-content>
     <mat-card-actions>
-      <button mat-flat-button color="primary" (click)="modificar()">Guardar</button> 
+      <button mat-flat-button color="primary" (click)="modificar()">Guardar</button>
+      <button mat-raised-button mat-dialog-close color="warn">Volver</button>
     </mat-card-actions>
   </mat-card>

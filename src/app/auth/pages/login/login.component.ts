@@ -47,10 +47,10 @@ export class LoginComponent implements OnInit{
                       toast.addEventListener('mouseleave', Swal.resumeTimer)
                     }
                   })
-                  
+
                   Toast.fire({
                     icon: 'success',
-                    title: 'Bienvenido administrador'
+                    title: `Bienvenido ${resp.name}`
                   })
                   this.router.navigateByUrl('/admin');
                 }else{
@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit{
                       toast.addEventListener('mouseleave', Swal.resumeTimer)
                     }
                   })
-                  
+
                   Toast.fire({
                     icon: 'error',
                     title: 'No eres administrador'

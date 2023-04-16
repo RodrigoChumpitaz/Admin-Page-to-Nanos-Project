@@ -124,6 +124,11 @@ button:hover {
 .bg2 {background-color: #1da1f2}
 .bg3 {background-color: #ea4335}
 
+.img{
+  width: 100%;
+  height: 50%;
+  object-fit: cover;
+}
 
 
 /*//////////////////////////////////////////////////////////////////

@@ -68,7 +68,7 @@ export class LocalesComponent implements OnInit {
       .subscribe({
         next: (rs:any) =>{
           const url= self ? this.router.url : '/admin/locales';
-          if(rs.message==="Local active"){
+          if(rs.message==="Local inactive"){
             const Toast = Swal.mixin({
               toast: true,
               position: 'top-end',
@@ -84,7 +84,7 @@ export class LocalesComponent implements OnInit {
               icon: 'error',
               title: 'se deshabilito el local seleccionado',
             })
-          }else if(rs.message==="Local inactive"){
+          }else if(rs.message==="Local active"){
             const Toast1 = Swal.mixin({
               toast: true,
               position: 'top-end',

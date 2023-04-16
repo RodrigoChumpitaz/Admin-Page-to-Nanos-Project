@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Breakpoints, BreakpointObserver } from '@angular/cdk/layout';
+import { format } from 'date-fns';
 import { ReportService } from 'src/app/auth/services/report.service';
 import { ReportCartResponse, SalesPerDayResponse } from 'src/app/auth/interfaces/report.interface';
 
@@ -40,7 +41,7 @@ export class DashboardComponent {
   categoryResult: any[] = [];
   orderDetailResult: any[] = [];
   view: [number, number] = [600, 400];
-  
+
 
   /*
     ! estas son las opciones de los graficos
@@ -66,13 +67,13 @@ export class DashboardComponent {
     console.log('Item clicked', JSON.parse(JSON.stringify(data)));
   }
 
-  onActivate(data: any): void {
-    console.log('Activate', JSON.parse(JSON.stringify(data)));
-  }
+  // onActivate(data: any): void {
+  //   console.log('Activate', JSON.parse(JSON.stringify(data)));
+  // }
 
-  onDeactivate(data: any): void {
-    console.log('Deactivate', JSON.parse(JSON.stringify(data)));
-  }
+  // onDeactivate(data: any): void {
+  //   console.log('Deactivate', JSON.parse(JSON.stringify(data)));
+  // }
 
   getReportCart(){
     this.reportService.topProductSale()

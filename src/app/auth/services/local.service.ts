@@ -18,7 +18,8 @@ export class LocalService {
     const direccion: string = `${this.baseUrl}/commons/locals`;
     const headers = new HttpHeaders({
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${token}`
+      'Authorization': `Bearer ${token}`,
+      'user_token': `${token}`
     })
     return this.http.get<RegistrarlocalI[]>(direccion,{headers:headers});
   }

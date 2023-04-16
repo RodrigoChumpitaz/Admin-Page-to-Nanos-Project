@@ -1,11 +1,10 @@
 <div class="container" style="padding-top:25%;" *ngIf="progress==0">
-    <p class="h1 text-center">Cargando</p>
     <mat-progress-spinner style="margin:0 auto;" mode="indeterminate"></mat-progress-spinner>
 </div>
 
   <div *ngIf="progress==100" class="container">
 
-    <button mat-raised-button style="margin-left: 3rem;" color="primary" (click)="nuevaCarta()">Nueva Carta<mat-icon>add</mat-icon></button>
+    <button mat-raised-button style="margin-left: 3rem;" color="primary" (click)="nuevaCarta()">Nueva Carta</button>
     <br>
 
     <br>

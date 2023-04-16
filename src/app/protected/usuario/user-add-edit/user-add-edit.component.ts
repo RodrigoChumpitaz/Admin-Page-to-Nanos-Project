@@ -14,6 +14,8 @@ import Swal from 'sweetalert2';
 })
 export class UserAddEditComponent implements OnInit {
 
+  dt!: string;
+  rol!: string;
   roles: Rol[] = [];
   documents: DocumentType[]=[];
 
@@ -21,7 +23,7 @@ export class UserAddEditComponent implements OnInit {
   tituloAccion: string = "Nuevo";
   botonAccion: string = "Guardar"
 
-  constructor(private dialogoReferencia: MatDialogRef<UserAddEditComponent>, private fb:FormBuilder, private _autService: AuthService, private _document: AuthService, @Inject (MAT_DIALOG_DATA)public dataUser:Data) {
+  constructor(private dialogoReferencia: MatDialogRef<UserAddEditComponent>, private fb:FormBuilder, private _autService: AuthService, private _document: AuthService, @Inject (MAT_DIALOG_DATA)public dataUser:Data | any) {
     this.formUsuario = this.fb.group({
       name: ['', Validators.required],
       lastname: ['',Validators.required],
@@ -34,7 +36,7 @@ export class UserAddEditComponent implements OnInit {
    }
 
    addEditUsuario(){
-    
+
     console.log(this.formUsuario.value)
     const modelo: Data ={
       _id: this.formUsuario.value.id,
@@ -50,7 +52,6 @@ export class UserAddEditComponent implements OnInit {
     if(this.dataUser == null){
       this._autService.registrar(modelo,token).subscribe({
         next:(data)=>{
-          console.log(data)
           const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
@@ -62,7 +63,7 @@ export class UserAddEditComponent implements OnInit {
               toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
           })
-          
+
           Toast.fire({
             icon: 'success',
             title: 'se añadio un nuevo usuario'
@@ -71,10 +72,8 @@ export class UserAddEditComponent implements OnInit {
       })
     }else{
       const token: string = localStorage.getItem('token')!;
-      console.log(this.dataUser);
       this._autService.update(modelo,this.dataUser._id, token).subscribe({
       next: (data)=>{
-        console.log(data)
         const Toast = Swal.mixin({
           toast: true,
           position: 'top-end',
@@ -86,7 +85,7 @@ export class UserAddEditComponent implements OnInit {
             toast.addEventListener('mouseleave', Swal.resumeTimer)
           }
         })
-        
+
         Toast.fire({
           icon: 'success',
           title: 'se edito el usuario selecionado'
@@ -96,7 +95,7 @@ export class UserAddEditComponent implements OnInit {
         console.log(err)
       }
     })
-    } 
+    }
     // console.log(this.formUsuario.value.roles)
   }
 
@@ -124,7 +123,8 @@ export class UserAddEditComponent implements OnInit {
     .subscribe({
       next:(data)=>{
         this.roles=data
-        console.log(data)
+        let rolIndex = this.roles.findIndex((rol) => rol.rol === this.dataUser.roles[0].rol);
+        this.rol = this.roles[rolIndex].rol;
       }
     })
   }
@@ -134,7 +134,8 @@ export class UserAddEditComponent implements OnInit {
     .subscribe({
       next:(data)=>{
         this.documents=data
-        console.log(data)
+        let documentTypeIndex = this.documents.findIndex((documentType) => documentType._id === this.dataUser.documentType);
+        this.dt = this.documents[documentTypeIndex].type;
       }
     })
   }

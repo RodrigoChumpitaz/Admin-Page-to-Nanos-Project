@@ -18,6 +18,7 @@ import { MatGridListModule } from '@angular/material/grid-list';
 import { MatCardModule } from '@angular/material/card';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatInputModule } from '@angular/material/input';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
 
 
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -88,13 +89,14 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     HttpClientModule,
 
     FormsModule,
-    
+
     MatInputModule,
 
     MatProgressSpinnerModule,
 
     /* se agrego */
-    NgxChartsModule
+    NgxChartsModule,
+    MatAutocompleteModule
   ]
 })
 export class ProtectedModule { }

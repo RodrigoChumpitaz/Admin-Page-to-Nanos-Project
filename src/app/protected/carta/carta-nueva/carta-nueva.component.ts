@@ -1,6 +1,8 @@
 import { Token } from '@angular/compiler';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm, Validators,FormControl } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
+import { Observable, map, startWith } from 'rxjs';
 import { CategoriaI } from 'src/app/auth/interfaces/categoria.interface';
 import { CartaService } from 'src/app/auth/services/carta.service';
 import { CategoriaService } from 'src/app/auth/services/categoria.service';
@@ -13,6 +15,8 @@ import Swal from 'sweetalert2';
 })
 export class CartaNuevaComponent implements OnInit {
 
+  control = new FormControl();
+  filteredOptions!: Observable<string[]>;
   image!: File;
   previsualizacion!: string;
   _mimesTypes: string[]=['image/png', 'image/jpeg', 'image/jpg', 'image/webp'];
@@ -20,12 +24,22 @@ export class CartaNuevaComponent implements OnInit {
   description!: string;
   price!: string;
   category!: string;
-  categoriaList:CategoriaI[]=[];
+  categoriaList:any[]=[];
 
   @ViewChild("cartImage") cartImage!: ElementRef<HTMLInputElement>;
   //@ViewChild("category") category2!: ElementRef<HTMLInputElement>;
 
-  constructor(private carta:CartaService,private categoria:CategoriaService) { }
+  constructor(private carta:CartaService,private categoria:CategoriaService, public dialog:MatDialog) {
+    this.filteredOptions = this.control.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.categoriaList.filter(option => option.name.toLowerCase().includes(filterValue));
+  }
 
   ngOnInit(): void {
     this.categoria.getAllCategorias()
@@ -58,9 +72,8 @@ export class CartaNuevaComponent implements OnInit {
     console.log(formData.get("cartImage"))
     console.log(token)
     this.carta.registrar(formData,token)
-    
     .subscribe({
-      next: (data) =>{
+      next: (data: any) =>{
         const Toast = Swal.mixin({
           toast: true,
           position: 'top-end',
@@ -72,12 +85,11 @@ export class CartaNuevaComponent implements OnInit {
             toast.addEventListener('mouseleave', Swal.resumeTimer)
           }
         })
-        
         Toast.fire({
           icon: 'success',
-          title: 'se añadio una nueva carta'
+          title: data.message
         })
-        console.log(data);
+        this.dialog.closeAll();
       },
       error: (err) => console.log(err)
     })
@@ -87,8 +99,13 @@ export class CartaNuevaComponent implements OnInit {
     if(this.cartImage.nativeElement.files![0]){
       this.image = this.cartImage.nativeElement.files![0];
       if(!this.mimeTypes.includes(this.image.type)){
-        console.log('El archivo no es una imagen');
-        alert('El archivo no es una imagen')
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'El archivo no es una imagen',
+        })
+        this.cartImage.nativeElement.value = '';
+        return
       }
       this.extractBase64(this.image)
       .then((data:any)=>{

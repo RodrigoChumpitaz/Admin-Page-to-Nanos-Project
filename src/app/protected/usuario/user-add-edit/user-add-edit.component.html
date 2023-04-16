@@ -23,7 +23,7 @@
               </mat-grid-tile>
               <mat-grid-tile>
                 <mat-form-field>
-                  <mat-select matInput placeholder="Seleccionar Documento" formControlName="documentType"  name="documentType">
+                  <mat-select matInput [(ngModel)]="dt" placeholder="Seleccionar Documento" formControlName="documentType"  name="documentType">
                     <mat-option *ngFor="let document of documents" [value]="document.type">{{document.type}}</mat-option>
                   </mat-select>
                 </mat-form-field>
@@ -42,7 +42,7 @@
               </mat-grid-tile>
               <mat-grid-tile>
                 <mat-form-field>
-                  <mat-select matInput placeholder="Seleccionar Roles" formControlName="roles"  name="roles">
+                  <mat-select matInput [(ngModel)]="rol"  placeholder="Seleccionar Roles" formControlName="roles"  name="roles">
                     <mat-option *ngFor="let rol of roles" [value]="rol.rol">{{rol.rol}}</mat-option>
                   </mat-select>
                 </mat-form-field>

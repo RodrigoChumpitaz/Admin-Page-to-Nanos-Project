@@ -168,7 +168,7 @@
   xAxisLabel="Fecha"
   yAxisLabel="Monto de Ventas"
   [legendPosition]="legendPosition"
-  [timeline]="true"
+  [timeline]="false"
   [results]="salesResult"
   (select)="onSelect($event)"
   >
@@ -205,8 +205,8 @@
   [showYAxisLabel]=true
   [xAxis]=true
   [yAxis]=true
-  xAxisLabel="xAxisLabel"
-  yAxisLabel="yAxisLabel"
+  xAxisLabel="Fecha de Pedido"
+  yAxisLabel="Porcentaje de Platos"
   [timeline]=true
   [results]="orderDetailResult"
   (select)="onSelect($event)">

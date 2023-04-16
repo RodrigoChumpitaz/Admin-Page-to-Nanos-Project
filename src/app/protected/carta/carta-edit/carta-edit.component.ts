@@ -4,8 +4,9 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dial
 import { CategoriaI } from 'src/app/auth/interfaces/categoria.interface';
 import { CartaService } from 'src/app/auth/services/carta.service';
 import { CategoriaService } from 'src/app/auth/services/categoria.service';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { Observable, map, startWith } from 'rxjs';
 
 @Component({
   selector: 'app-carta-edit',
@@ -13,11 +14,14 @@ import Swal from 'sweetalert2';
   styleUrls: ['./carta-edit.component.css']
 })
 export class CartaEditComponent implements OnInit {
+  control = new FormControl();
+  filteredOptions: Observable<string[]>;
   token: string = localStorage.getItem('token')!
   image!: File;
+  selectedOption!: string;
   previsualizacion!: string;
   _mimesTypes: string[]=['image/png', 'image/jpeg', 'image/jpg', 'image/webp'];
-  categoriaList:CategoriaI[]=[];
+  categoriaList:any[]=[];
   formularioEdit = this.fb.group({
     "_id":[""],
     "name": [""],
@@ -25,20 +29,27 @@ export class CartaEditComponent implements OnInit {
     "price": [""],
     "category": [""],
   });
-  
+
 
   @ViewChild("cartImage") cartImage!: ElementRef<HTMLInputElement>;
   // @ViewChild("category1") category1!: ElementRef<HTMLInputElement> | any;
-  
+
 
   constructor(private cartaService :CartaService,private categoriaService :CategoriaService,
-    @Inject(MAT_DIALOG_DATA) public dataCart: Cart, private fb: FormBuilder) {
-      console.log("Verificando: "+ this.dataCart);
+    @Inject(MAT_DIALOG_DATA) public dataCart: Cart, private fb: FormBuilder, public dialog: MatDialog) {
+      this.filteredOptions = this.control.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
     }
 
-  
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
 
-  
+    return this.categoriaList.filter(option => option.name.toLowerCase().includes(filterValue));
+  }
+
+
   get mimeTypes(){
     return [...this._mimesTypes]
   }
@@ -60,8 +71,7 @@ export class CartaEditComponent implements OnInit {
     console.log(this.formularioEdit.value._id);
     this.cartaService.editar(formData,this.token)
       .subscribe({
-        next: (rs) => {
-          console.log(rs);
+        next: (rs: any) => {
           const Toast = Swal.mixin({
             toast: true,
             position: 'top-end',
@@ -75,8 +85,9 @@ export class CartaEditComponent implements OnInit {
           })
           Toast.fire({
             icon: 'success',
-            title: 'se edito el la carta selecionada'
+            title: rs.message
           })
+          this.dialog.closeAll();
         },
         error: err => console.log(err)
       })
@@ -86,8 +97,13 @@ export class CartaEditComponent implements OnInit {
     if(this.cartImage.nativeElement.files![0]){
       this.image = this.cartImage.nativeElement.files![0];
       if(!this.mimeTypes.includes(this.image.type)){
-        console.log('El archivo no es una imagen');
-        alert('El archivo no es una imagen')
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'El archivo no es una imagen',
+        })
+        this.cartImage.nativeElement.value = '';
+        return
       }
       this.extractBase64(this.image)
       .then((data:any)=>{
@@ -124,9 +140,7 @@ export class CartaEditComponent implements OnInit {
         price: this.dataCart.price,
         category: this.dataCart.category
       })
-      //this.categoriaList=this.dataCart.category
-      //const index = categoriaList.findIndex(categoria => categoria.nombre === category);
-      //console.log(index)
+      this.selectedOption = this.dataCart.category.name;
     }
     this.categoriaService.getAllCategorias()
     .subscribe({

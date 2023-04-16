@@ -37,7 +37,6 @@ export class UsuarioComponent implements OnInit {
     this.authService.getAllUser(token)
       .subscribe({
         next: (resp) => {
-          console.log(resp);
           this.user = resp;
         },
           error: (err) => {

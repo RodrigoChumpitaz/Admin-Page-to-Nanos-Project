@@ -8,12 +8,12 @@
   <input #cartImage (change)="captar()" class="form-control" type="file" name="cartImage" style="margin: 30px;">
 
   <div *ngIf="previsualizacion">
-    <img class="img-thumbnail" [src]="previsualizacion">
+    <img class="img" [src]="previsualizacion">
   </div>
 
   <br>
 
-   
+
       <form class="example-form">
         <mat-grid-list cols="2" rowHeight="80px">
           <mat-grid-tile>
@@ -37,18 +37,23 @@
           <mat-grid-tile>
             <mat-form-field appearance="outline">
               <mat-label>Categoria</mat-label>
-              <mat-select matInput placeholder="Seleccionar Categoria" [(ngModel)]="category" name="category">
+              <mat-select matInput [formControl]="control" matAutocompleteOrigin placeholder="Seleccionar Categoria" [(ngModel)]="category" name="category">
                 <mat-option *ngFor="let categoria of categoriaList"
                   [value]="categoria.description">{{categoria.description}}</mat-option>
               </mat-select>
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let categoria of categoriaList"
+                  [value]="categoria.description">{{categoria.description}}</mat-option>
+              </mat-autocomplete>
             </mat-form-field>
           </mat-grid-tile>
         </mat-grid-list>
       </form>
-    
+
 
   <mat-card-actions>
-    <button mat-button (click)="save()">Guardar</button>
+    <button mat-flat-button color="primary" (click)="save()">Guardar</button>
+    <button mat-raised-button mat-dialog-close color="warn">Volver</button>
   </mat-card-actions>
 
 </mat-card>

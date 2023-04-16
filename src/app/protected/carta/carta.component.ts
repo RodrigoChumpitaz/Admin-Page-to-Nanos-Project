@@ -25,6 +25,9 @@ export class CartaComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllcarta();
+    this.cartaService.cartaActualizada$.subscribe(data => {
+      this.getAllcarta();
+    })
   }
   nuevaCarta() {
     this.dialog.open(CartaNuevaComponent,{
@@ -89,9 +92,9 @@ export class CartaComponent implements OnInit {
               title: 'se habilito la carta seleccionada',
             })
           }
-          this.router.navigateByUrl('/',{skipLocationChange:true}).then( async ()=>{
-            await this.router.navigate([`/${url}`])
-          })
+          // this.router.navigateByUrl('/',{skipLocationChange:true}).then( async ()=>{
+          //   await this.router.navigate([`/${url}`])
+          // })
         },
         error: (err: any) => console.log(err.headers)
       })

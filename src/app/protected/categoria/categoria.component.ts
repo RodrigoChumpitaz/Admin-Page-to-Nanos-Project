@@ -41,7 +41,7 @@ export class CategoriaComponent implements OnInit {
   nuevaCategoria(){
     this.dialog.open(CategoriaNuevaComponent,{
       width: '500px',
-      height: '450px'
+      height: '350px'
 
     });
     this.getAllCategorias();
@@ -49,8 +49,8 @@ export class CategoriaComponent implements OnInit {
 
   editarcategoria(dataCat:Cat){
     this.dialog.open(CategoriaEditComponent,{
-        width: '500px',
-        height: '450px',
+        width: '800px',
+        height: '500px',
         data: dataCat
     })
   }
@@ -93,7 +93,7 @@ export class CategoriaComponent implements OnInit {
               title: 'se habilito la categoria seleccionada',
             })
           }
-          
+
           this.router.navigateByUrl('/',{skipLocationChange:true}).then( async ()=>{
             await this.router.navigate([`/${url}`])
           })
@@ -114,6 +114,6 @@ export class CategoriaComponent implements OnInit {
       return 'invalid'
     }
   }
-  
+
 
 }

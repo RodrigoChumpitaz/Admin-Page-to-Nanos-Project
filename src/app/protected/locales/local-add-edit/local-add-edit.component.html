@@ -16,9 +16,12 @@
       </mat-grid-tile>
       <mat-grid-tile>
         <mat-form-field>
-          <mat-select matInput placeholder="Seleccionar Distrito" formControlName="distrito" name="distrito">
+          <mat-select [(ngModel)]="selectedOption" matInput placeholder="Seleccionar Distrito"  matAutocompleteOrigin formControlName="distrito">
             <mat-option *ngFor="let distric of districts" [value]="distric.nombre">{{distric.nombre}}</mat-option>
           </mat-select>
+          <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let distric of districts" [value]="distric.nombre">{{distric.nombre}}</mat-option>
+          </mat-autocomplete>
         </mat-form-field>
       </mat-grid-tile>
     </mat-grid-list>

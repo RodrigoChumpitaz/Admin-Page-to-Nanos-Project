@@ -23,15 +23,14 @@ export class CategoriaEditComponent implements OnInit {
 
   @ViewChild("categoryImage") categoryImage!: ElementRef<HTMLInputElement>;
 
-  constructor(private _categoriaService: CategoriaService, @Inject(MAT_DIALOG_DATA) public dataCat: Cat, private fb: FormBuilder) { 
-    console.log("Verificando: "+ this.dataCat);
+  constructor(private _categoriaService: CategoriaService, @Inject(MAT_DIALOG_DATA) public dataCat: Cat, private fb: FormBuilder) {
   }
 
   get mimeTypes(){
     return [...this._mimesTypes]
   }
 
-  
+
 
   modificar(){
     const formData = new FormData();
@@ -56,7 +55,7 @@ export class CategoriaEditComponent implements OnInit {
               toast.addEventListener('mouseleave', Swal.resumeTimer)
             }
           })
-          
+
           Toast.fire({
             icon: 'success',
             title: 'se edito la categoria selecionada'
