@@ -4,6 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Rol, DocumentType, Data } from 'src/app/auth/interfaces/auth.interface';
 import { AuthService  } from 'src/app/auth/services/auth.service';
 import Swal from 'sweetalert2';
+import { MatDialog } from '@angular/material/dialog';
 
 
 
@@ -23,7 +24,7 @@ export class UserAddEditComponent implements OnInit {
   tituloAccion: string = "Nuevo";
   botonAccion: string = "Guardar"
 
-  constructor(private dialogoReferencia: MatDialogRef<UserAddEditComponent>, private fb:FormBuilder, private _autService: AuthService, private _document: AuthService, @Inject (MAT_DIALOG_DATA)public dataUser:Data | any) {
+  constructor(private dialogoReferencia: MatDialogRef<UserAddEditComponent>, private fb:FormBuilder, private _autService: AuthService, private _document: AuthService,public dialog:MatDialog, @Inject (MAT_DIALOG_DATA)public dataUser:Data | any) {
     this.formUsuario = this.fb.group({
       name: ['', Validators.required],
       lastname: ['',Validators.required],
@@ -68,6 +69,7 @@ export class UserAddEditComponent implements OnInit {
             icon: 'success',
             title: 'se añadio un nuevo usuario'
           })
+          this.dialog.closeAll();
         }
       })
     }else{
@@ -90,6 +92,7 @@ export class UserAddEditComponent implements OnInit {
           icon: 'success',
           title: 'se edito el usuario selecionado'
         })
+        this.dialog.closeAll();
       },
       error: (err) =>{
         console.log(err)

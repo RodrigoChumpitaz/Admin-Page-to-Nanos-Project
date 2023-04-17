@@ -91,7 +91,13 @@ export class CartaNuevaComponent implements OnInit {
         })
         this.dialog.closeAll();
       },
-      error: (err) => console.log(err)
+      error: (err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Todos los campos son requeridos!',
+        })
+      }
     })
 
   }

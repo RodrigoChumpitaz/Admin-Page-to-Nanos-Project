@@ -30,6 +30,9 @@ export class UsuarioComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllUsers();
+    this.authService.userActualizada$.subscribe(data => {
+      this.getAllUsers();
+    })
   }
 
   getAllUsers(){
@@ -105,9 +108,9 @@ export class UsuarioComponent implements OnInit {
               title: 'se habilito el usuario seleccionado',
             })
           }
-          this.router.navigateByUrl('/',{skipLocationChange:true}).then( async ()=>{
-            await this.router.navigate([`/${url}`])
-          })
+          // this.router.navigateByUrl('/',{skipLocationChange:true}).then( async ()=>{
+          //   await this.router.navigate([`/${url}`])
+          // })
         },
         error: (err: any) => console.log(err.headers)
       })
@@ -125,7 +128,5 @@ export class UsuarioComponent implements OnInit {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
-
-
-
+  
 }

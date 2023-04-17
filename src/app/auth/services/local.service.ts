@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders  } from '@angular/common/http';
 import { RegistrarlocalI } from '../interfaces/local.interface';
 import { DistritoResponse } from '../interfaces/distrito.interface';
 import { environment } from 'src/environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -11,6 +11,8 @@ import { Observable } from 'rxjs';
 export class LocalService {
 
   private baseUrl: string = environment.baseUrl;
+
+  private dataUpdated = new Subject<boolean>(); // necesario para observable
 
   constructor(private http:HttpClient) { }
 
@@ -30,7 +32,12 @@ export class LocalService {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     })
-    return this.http.post<RegistrarlocalI>(baseUrl,modelo,{headers:headers});
+    return this.http.post<RegistrarlocalI>(baseUrl,modelo,{headers:headers})
+    .pipe(
+      tap(() => {
+        this.dataUpdated.next(true); /* se usa para refrescar la data en tiempo real */
+      })
+    )
   }
 
   getDistricts(token: string):Observable<DistritoResponse[]>{
@@ -48,7 +55,12 @@ export class LocalService {
       // 'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     })
-    return this.http.patch<RegistrarlocalI[]>(direccion,modelo,{headers:headers});
+    return this.http.patch<RegistrarlocalI[]>(direccion,modelo,{headers:headers})
+    .pipe(
+      tap(() => {
+        this.dataUpdated.next(true); /* se usa para refrescar la data en tiempo real */
+      })
+    )
   }
 
   changeAvailable(token: string, _id: string){
@@ -56,7 +68,16 @@ export class LocalService {
     const headers = new HttpHeaders({
       'Authorization': `Bearer ${token}`
     });
-    return this.http.patch(baseurl, null, {headers:headers});
+    return this.http.patch(baseurl, null, {headers:headers})
+    .pipe(
+      tap(() => {
+        this.dataUpdated.next(true); /* se usa para refrescar la data en tiempo real */
+      })
+    )
+  }
+
+  get localActualizada$(): Observable<boolean>{ // necesario para tomar los datos nuevos
+    return this.dataUpdated.asObservable();
   }
 
 }

@@ -58,4 +58,7 @@ export class CartaService {
   get cartaActualizada$(): Observable<boolean>{ // necesario para tomar los datos nuevos
     return this.dataUpdated.asObservable();
   }
+  
 }
+
+

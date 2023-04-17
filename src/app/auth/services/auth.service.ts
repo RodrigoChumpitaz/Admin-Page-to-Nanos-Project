@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import { Observable, Subject, pipe, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AuthResponse, ProfileInterface,Data, Rol, DocumentType } from '../interfaces/auth.interface';
 
@@ -10,6 +10,9 @@ import { AuthResponse, ProfileInterface,Data, Rol, DocumentType } from '../inter
 })
 export class AuthService {
   private baseUrl: string = environment.baseUrl;
+
+  private dataUpdated = new Subject<boolean>(); // necesario para observable
+
   constructor( private http: HttpClient ) { }
 
   login( email: string, password: string ){
@@ -51,7 +54,12 @@ export class AuthService {
       'Content-Type': 'application/json',
       'token_insert_user': `${token}`
     })
-    return this.http.post<Data>(Url,modelo,{headers:headers});
+    return this.http.post<Data>(Url,modelo,{headers:headers})
+    .pipe(
+      tap(() => {
+        this.dataUpdated.next(true); /* se usa para refrescar la data en tiempo real */
+      })
+    )
   }
 
   getRoles(token: string):Observable<Rol[]>{
@@ -82,7 +90,12 @@ export class AuthService {
       //'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`
     })
-    return this.http.patch<Data[]>(direccion,modelo,{headers:headers});
+    return this.http.patch<Data[]>(direccion,modelo,{headers:headers})
+    .pipe(
+      tap(() => {
+        this.dataUpdated.next(true); /* se usa para refrescar la data en tiempo real */
+      })
+    )
   }
 
   changeAvailable(token: string, _id: string){
@@ -91,5 +104,15 @@ export class AuthService {
       'Authorization': `Bearer ${token}`
     });
     return this.http.patch(baseurl, null, {headers:headers})
+    .pipe(
+      tap(() => {
+        this.dataUpdated.next(true); /* se usa para refrescar la data en tiempo real */
+      })
+    )
   }
+
+  get userActualizada$(): Observable<boolean>{ // necesario para tomar los datos nuevos
+    return this.dataUpdated.asObservable();
+  }
+
 }

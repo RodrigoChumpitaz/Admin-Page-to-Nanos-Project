@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, NgForm, Validators,FormControl } from '@angular
 import { CategoriaI } from 'src/app/auth/interfaces/categoria.interface';
 import { CategoriaService } from 'src/app/auth/services/categoria.service';
 import Swal from 'sweetalert2';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-categoria-nueva',
@@ -18,7 +19,7 @@ export class CategoriaNuevaComponent implements OnInit {
 
   @ViewChild("categoryImage") categoryImage!: ElementRef<HTMLInputElement>;
 
-  constructor(private _categoriaService: CategoriaService) { }
+  constructor(private _categoriaService: CategoriaService, public dialog:MatDialog) { }
 
   ngOnInit(): void {
   }
@@ -54,11 +55,17 @@ export class CategoriaNuevaComponent implements OnInit {
         
         Toast.fire({
           icon: 'success',
-          title: 'se añadio una nueva categoria'
+          title: 'Se añadio una nueva Categoria'
         })
+        this.dialog.closeAll();
       },
-      error: (err) => console.log(err)
-      
+      error: (err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Todos los campos son requeridos!',
+        })
+      }
     })
   }
 
@@ -66,13 +73,19 @@ export class CategoriaNuevaComponent implements OnInit {
     if(this.categoryImage.nativeElement.files![0]){
       this.image = this.categoryImage.nativeElement.files![0];
       if(!this.mimeTypes.includes(this.image.type)){
-        console.log('El archivo no es una imagen');
-        alert('El archivo no es una imagen')
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'El archivo no es una imagen',
+        })
+        this.categoryImage.nativeElement.value = '';
+        return
       }
       this.extractBase64(this.image)
       .then((data:any)=>{
         this.previsualizacion= data.data;
       })
+
     }
   }
 

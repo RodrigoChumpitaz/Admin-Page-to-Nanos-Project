@@ -26,6 +26,9 @@ export class LocalesComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllLocal();
+    this.api.localActualizada$.subscribe(data => {
+      this.getAllLocal();
+    })
   }
 
   getAllLocal(){
@@ -98,12 +101,12 @@ export class LocalesComponent implements OnInit {
             })
             Toast1.fire({
               icon: 'info',
-              title: 'se habilito la carta seleccionada',
+              title: 'se habilito el local seleccionado',
             })
           }
-          this.router.navigateByUrl('/',{skipLocationChange:true}).then( async ()=>{
-            await this.router.navigate([`/${url}`])
-          })
+          // this.router.navigateByUrl('/',{skipLocationChange:true}).then( async ()=>{
+          //   await this.router.navigate([`/${url}`])
+          // })
         },
         error: (err: any) => console.log(err.headers)
       })

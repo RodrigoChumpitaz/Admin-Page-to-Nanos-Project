@@ -1,126 +1,8 @@
-<!-- <div class="grid-container">
-  <h1 class="mat-h1">Dashboard</h1>
-  <mat-grid-list cols="2" rowHeight="350px">
-    <mat-grid-tile *ngFor="let card of cards | async" [colspan]="card.cols" [rowspan]="card.rows">
-      <mat-card class="dashboard-card">
-        <mat-card-header>
-          <mat-card-title>
-            {{card.title}}
-            <button mat-icon-button class="more-button" [matMenuTriggerFor]="menu" aria-label="Toggle menu">
-              <mat-icon>more_vert</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu" xPosition="before">
-              <button mat-menu-item>Expand</button>
-              <button mat-menu-item>Remove</button>
-            </mat-menu>
-          </mat-card-title>
-        </mat-card-header>
-        <mat-card-content class="dashboard-card-content">
-          <div>Card Content Here</div>
-        </mat-card-content>
-      </mat-card>
-    </mat-grid-tile>
-  </mat-grid-list>
-</div> -->
-
-<!-- <h4>Cantidad de categorias por pedido</h4>
- <ngx-charts-pie-chart
- [view]="view"
- scheme="vivid"
- [results]="categoryResult"
- [gradient]=true
- [legend]="showLegend"
- [legendPosition]="legendPosition"
- [labels]="showLabels"
- [doughnut]="isDoughnut"
- >
-</ngx-charts-pie-chart>
-<br>
-<br>
-<br>
-<h4>Platos más vendidos</h4>
-<ngx-charts-bar-vertical
-  [view]="view"
-  scheme="night"
-  [results]="productResult"
-  [gradient]="gradient"
-  xAxis=true
-  yAxis=true
-  [legend]="showLegend"
-  [legendPosition]="legendPosition"
-  [showXAxisLabel]=true
-  [showYAxisLabel]=true
-  xAxisLabel="Cartas"
-  yAxisLabel="Cantidad de Pedidos"
-  (select)="onSelect($event)">
-</ngx-charts-bar-vertical>
-<br>
-<br>
-<br>
-<h4>Reporte de Venta por día</h4>
-<ngx-charts-line-chart
-  [view]="view"
-  scheme="cool"
-  [legend]="showLegend"
-  [showXAxisLabel]="true"
-  [showYAxisLabel]="true"
-  [xAxis]="true"
-  [yAxis]="true"
-  xAxisLabel="Fecha"
-  yAxisLabel="Monto de Ventas"
-  [legendPosition]="legendPosition"
-  [timeline]="true"
-  [results]="salesResult"
-  (select)="onSelect($event)"
-  >
-</ngx-charts-line-chart>
-<br>
-<br>
-<br>
-<h4>Reporte de Venta por Cliente</h4>
-<ngx-charts-heat-map
-  [view]="view"
-  scheme="cool"
-  [legend]="showLegend"
-  [showXAxisLabel]=true
-  [showYAxisLabel]=true
-  [xAxis]=true
-  [yAxis]=true
-  xAxisLabel="Clientes"
-  yAxisLabel="Fecha de Compra"
-  [results]="salesClientResult"
-  (select)="onSelect($event)"
-  >
-</ngx-charts-heat-map>
-<br>
-<br>
-<br>
-<br>
-<h4>Porcentaje de Platos por pedido por día</h4>
-<ngx-charts-area-chart-normalized
-  [view]="view"
-  scheme="nightLights"
-  [legend]="showLegend"
-  [showXAxisLabel]=true
-  [showYAxisLabel]=true
-  [xAxis]=true
-  [yAxis]=true
-  xAxisLabel="xAxisLabel"
-  yAxisLabel="yAxisLabel"
-  [timeline]=true
-  [results]="orderDetailResult"
-  (select)="onSelect($event)">
-</ngx-charts-area-chart-normalized> -->
 
 
-
-
-
-
-<mat-grid-list cols="2" rowHeight="2:1">
+<mat-grid-list cols="2" rowHeight="2:1" gutterSize="30px">
 
   <mat-grid-tile>
-  <h4><span>Cantidad de categorias por pedido</span></h4>
   <ngx-charts-pie-chart
   [view]="view"
   scheme="vivid"
@@ -136,7 +18,6 @@
 
 
   <mat-grid-tile>
-  <h4><span> Platos más vendidos</span></h4>
   <ngx-charts-bar-vertical
   [view]="view"
   scheme="night"
@@ -156,7 +37,6 @@
 
 
   <mat-grid-tile>
-  <h4><span>Reporte de Venta por día</span></h4>
   <ngx-charts-line-chart
   [view]="view"
   scheme="cool"
@@ -177,7 +57,6 @@
 
 
   <mat-grid-tile>
-  <h4><span>Reporte de Venta por Cliente</span></h4>
   <ngx-charts-heat-map
   [view]="view"
   scheme="cool"
@@ -196,7 +75,6 @@
 
 
   <mat-grid-tile>
-  <h4><span>Porcentaje de Platos por pedido por día</span></h4>
   <ngx-charts-area-chart-normalized
   [view]="view"
   scheme="nightLights"

@@ -5,7 +5,7 @@
     </mat-card-header>
     <input #categoryImage (change)="captar()" class="form-control" type="file" name="categoryImage" style="margin: 15px;">
     <div *ngIf="previsualizacion">
-        <img class="img-thumbnail" [src]="previsualizacion">
+        <img class="img" [src]="previsualizacion">
     </div>
     <br>
     <mat-card-content>
@@ -19,8 +19,9 @@
           </mat-grid-tile>
           </mat-grid-list>
         </form>
+        <mat-card-actions style="margin: 15px;">
+          <button mat-flat-button color="primary" (click)="save()">Guardar</button> 
+        </mat-card-actions>
     </mat-card-content>
-    <mat-card-actions>
-      <button mat-button (click)="save()">Guardar</button> 
-    </mat-card-actions>
+    
   </mat-card>

@@ -28,6 +28,9 @@ export class CategoriaComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllCategorias();
+    this._categoriaService.categoriaActualizada$.subscribe(data => {
+      this.getAllCategorias();
+    })
   }
 
   getAllCategorias(){
@@ -49,8 +52,8 @@ export class CategoriaComponent implements OnInit {
 
   editarcategoria(dataCat:Cat){
     this.dialog.open(CategoriaEditComponent,{
-        width: '800px',
-        height: '500px',
+        width: '500px',
+        height: '350px',
         data: dataCat
     })
   }
@@ -94,9 +97,9 @@ export class CategoriaComponent implements OnInit {
             })
           }
 
-          this.router.navigateByUrl('/',{skipLocationChange:true}).then( async ()=>{
-            await this.router.navigate([`/${url}`])
-          })
+          // this.router.navigateByUrl('/',{skipLocationChange:true}).then( async ()=>{
+          //   await this.router.navigate([`/${url}`])
+          // })
         },
         error: (err: any) => console.log(err.headers)
       })

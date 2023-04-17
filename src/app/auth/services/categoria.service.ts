@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject, tap } from 'rxjs';
 import { CategoriaI } from '../interfaces/categoria.interface';
 
 @Injectable({
@@ -8,6 +8,9 @@ import { CategoriaI } from '../interfaces/categoria.interface';
 })
 export class CategoriaService {
   private url:string = "http://localhost:3500";
+  private dataUpdated = new Subject<boolean>(); // necesario para observable
+
+
   constructor(private http:HttpClient) { }
 
   getAllCategorias(){
@@ -24,6 +27,11 @@ export class CategoriaService {
       'Authorization': `Bearer ${token}`
     });
     return this.http.post<CategoriaI>(baseurl,categoria,{headers:headers})
+    .pipe(
+      tap(() => {
+        this.dataUpdated.next(true); /* se usa para refrescar la data en tiempo real */
+      })
+    )
   }
 
   editar(categoria:FormData, slug: string, token: string):Observable<CategoriaI>{
@@ -32,6 +40,11 @@ export class CategoriaService {
       'Authorization': `Bearer ${token}`
     });
     return this.http.patch<CategoriaI>(baseurl,categoria,{headers:headers})
+    .pipe(
+      tap(() => {
+        this.dataUpdated.next(true); /* se usa para refrescar la data en tiempo real */
+      })
+    )
   }
 
   changeAvailable(token: string, _id: string){
@@ -40,5 +53,14 @@ export class CategoriaService {
       'Authorization': `Bearer ${token}`
     });
     return this.http.patch(baseurl, null, {headers:headers})
+    .pipe(
+      tap(() => {
+        this.dataUpdated.next(true); /* se usa para refrescar la data en tiempo real */
+      })
+    )
+  }
+
+  get categoriaActualizada$(): Observable<boolean>{ // necesario para tomar los datos nuevos
+    return this.dataUpdated.asObservable();
   }
 }

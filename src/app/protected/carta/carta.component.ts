@@ -29,6 +29,7 @@ export class CartaComponent implements OnInit {
       this.getAllcarta();
     })
   }
+
   nuevaCarta() {
     this.dialog.open(CartaNuevaComponent,{
       width: '600px',
@@ -89,7 +90,7 @@ export class CartaComponent implements OnInit {
             })
             Toast1.fire({
               icon: 'info',
-              title: 'se habilito la carta seleccionada',
+              title: 'Se habilito la Carta Seleccionada',
             })
           }
           // this.router.navigateByUrl('/',{skipLocationChange:true}).then( async ()=>{

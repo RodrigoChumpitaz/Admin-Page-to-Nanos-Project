@@ -46,12 +46,14 @@
                     <mat-option *ngFor="let rol of roles" [value]="rol.rol">{{rol.rol}}</mat-option>
                   </mat-select>
                 </mat-form-field>
-              </mat-grid-tile>
+              </mat-grid-tile> 
         </mat-grid-list>
     </form>
+    <mat-dialog-actions style="margin-left: 60px;">
+      <button mat-raised-button mat-dialog-close color="warn">Volver</button>
+      <button mat-raised-button  color="primary" (click)="addEditUsuario()" [disabled]="formUsuario.invalid">{{botonAccion}}</button>
+  </mat-dialog-actions>
 </div>
-<div mat-dialog-actions>
-    <button mat-raised-button mat-dialog-close color="warn">Volver</button>
-    <button mat-raised-button  color="primary" (click)="addEditUsuario()" [disabled]="formUsuario.invalid">{{botonAccion}}</button>
-</div>
+
+
 

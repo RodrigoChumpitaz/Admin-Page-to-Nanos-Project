@@ -1,28 +1,26 @@
 <mat-card class="example-card">
     <mat-card-header>
-      <div mat-card-avatar class="example-header-image"></div>
-      <mat-card-title class="text-center">Editar la Categoria</mat-card-title>
+        <div mat-card-avatar class="example-header-image"></div>
+        <mat-card-title class="text-center">Editar la Categoria</mat-card-title>
     </mat-card-header>
     <input #categoryImage (change)="captar()" class="form-control" type="file" name="categoryImage" style="margin: 15px;">
     <div *ngIf="previsualizacion">
-        <img class="img-thumbnail" [src]="previsualizacion">
+        <img class="img" [src]="previsualizacion">
     </div>
     <br>
     <mat-card-content>
-        <form class="example-form" [formGroup]="formularioEdit" style="margin: 10px;">
-            <mat-grid-list cols="2" rowHeight="80px">
+        <form class="example-form" [formGroup]="formularioEdit">
+            <mat-grid-list cols="2" rowHeight="80px" style="margin: 15px;">
                 <input type="hidden" name="slug" formControlName="slug">
-            <br>
-            <mat-grid-tile>
-            <mat-form-field class="example-full-width">
-                <mat-label>Description</mat-label>
-                    <input type="text" matInput formControlName="description"  name="description">
-                </mat-form-field>
-            </mat-grid-tile>
+                <br>
+                    <mat-form-field class="example-full-width">
+                        <mat-label>Description</mat-label>
+                        <input type="text" matInput formControlName="description" name="description">
+                    </mat-form-field>   
             </mat-grid-list>
         </form>
     </mat-card-content>
-    <mat-card-actions>
-      <button mat-flat-button color="primary" (click)="modificar()">Guardar</button> 
+    <mat-card-actions style="margin: 15px;">
+        <button mat-flat-button color="primary" (click)="modificar()">Guardar</button>
     </mat-card-actions>
-  </mat-card>
+</mat-card>

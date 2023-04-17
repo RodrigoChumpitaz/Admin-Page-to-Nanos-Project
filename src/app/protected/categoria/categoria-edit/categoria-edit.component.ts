@@ -23,7 +23,7 @@ export class CategoriaEditComponent implements OnInit {
 
   @ViewChild("categoryImage") categoryImage!: ElementRef<HTMLInputElement>;
 
-  constructor(private _categoriaService: CategoriaService, @Inject(MAT_DIALOG_DATA) public dataCat: Cat, private fb: FormBuilder) {
+  constructor(private _categoriaService: CategoriaService,public dialog:MatDialog, @Inject(MAT_DIALOG_DATA) public dataCat: Cat, private fb: FormBuilder) {
   }
 
   get mimeTypes(){
@@ -58,8 +58,9 @@ export class CategoriaEditComponent implements OnInit {
 
           Toast.fire({
             icon: 'success',
-            title: 'se edito la categoria selecionada'
+            title: 'Se editó la Categoria Seleccionada'
           })
+          this.dialog.closeAll();
         },
         error: err => console.log(err)
       })
@@ -69,8 +70,13 @@ export class CategoriaEditComponent implements OnInit {
     if(this.categoryImage.nativeElement.files![0]){
       this.image = this.categoryImage.nativeElement.files![0];
       if(!this.mimeTypes.includes(this.image.type)){
-        console.log('El archivo no es una imagen');
-        alert('El archivo no es una imagen')
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'El archivo no es una imagen',
+        })
+        this.categoryImage.nativeElement.value = '';
+        return
       }
       this.extractBase64(this.image)
       .then((data:any)=>{

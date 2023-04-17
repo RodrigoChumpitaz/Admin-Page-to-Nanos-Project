@@ -6,6 +6,7 @@ import { DistritoResponse } from 'src/app/auth/interfaces/distrito.interface';
 import { Distrito, RegistrarlocalI } from 'src/app/auth/interfaces/local.interface';
 import { LocalService } from 'src/app/auth/services/local.service';
 import Swal from 'sweetalert2';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-local-add-edit',
@@ -23,7 +24,7 @@ export class LocalAddEditComponent implements OnInit {
 
   selectedOption!: string;
 
-  constructor(private dialogoReferencia: MatDialogRef<LocalAddEditComponent>, private fb:FormBuilder, private _localServicio: LocalService, @Inject (MAT_DIALOG_DATA)public dataLocal:RegistrarlocalI) {
+  constructor(private dialogoReferencia: MatDialogRef<LocalAddEditComponent>, private fb:FormBuilder, private _localServicio: LocalService,public dialog:MatDialog, @Inject (MAT_DIALOG_DATA)public dataLocal:RegistrarlocalI) {
     this.formLocal = this.fb.group({
       telefono: ['', Validators.required],
       direccion: ['', Validators.required],
@@ -71,6 +72,7 @@ export class LocalAddEditComponent implements OnInit {
           icon: 'success',
           title: 'se añadio un nuevo local'
         })
+        this.dialog.closeAll();
       }
     })
    }else{
@@ -95,6 +97,7 @@ export class LocalAddEditComponent implements OnInit {
           icon: 'success',
           title: 'se edito el local selecionado'
         })
+        this.dialog.closeAll();
       },
       error: (err) =>{
         console.log(err)
