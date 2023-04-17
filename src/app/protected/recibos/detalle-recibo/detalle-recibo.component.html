@@ -1,0 +1,71 @@
+<!-- <mat-card >
+  <mat-card-content>
+    <mat-grid-list cols="3" gutterSize="15px" rowHeight="6rem">
+      <mat-grid-tile>
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre</mat-label>
+          <input readonly matInput [(ngModel)]="clientName" autocomplete="off">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input readonly matInput [(ngModel)]="email" autocomplete="off">
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile>
+        <mat-form-field appearance="outline">
+          <mat-label>Fecha de Entrega</mat-label>
+          <input type="datetime" readonly matInput [(ngModel)]="deliveryDate" autocomplete="off">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field appearance="outline">
+          <mat-label>Estado del Pedido</mat-label>
+          <input type="text" readonly matInput [(ngModel)]="status" autocomplete="off">
+        </mat-form-field>
+      </mat-grid-tile>
+      <mat-grid-tile>
+        <mat-form-field appearance="outline">
+          <mat-label>Observacion</mat-label>
+          <textarea readonly matInput [(ngModel)]="observation" autocomplete="off"></textarea>
+        </mat-form-field>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-content>
+
+
+</mat-card> -->
+
+<mat-card-content><h3 class="text-center">Detalles del Pedido</h3></mat-card-content>
+
+<mat-grid-list cols="2" gutterSize="18px" rowHeight="15rem" >
+  <mat-grid-tile class="bg" *ngFor="let detail of datallePedido">
+    <mat-card class="example-card card">
+      <mat-form-field appearance="outline">
+        <mat-label>Categoria</mat-label>
+        <input readonly matInput  [value]="detail.Cart.category.name" autocomplete="off">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Plato</mat-label>
+        <input readonly matInput [value]="detail.Cart.name" autocomplete="off">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Precio</mat-label>
+        <input readonly matInput [value]="detail.Cart.price" autocomplete="off">
+      </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Cantidad</mat-label>
+        <input readonly matInput [value]="detail.quantity" autocomplete="off">
+      </mat-form-field>
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+
+
+
+
+
+
+

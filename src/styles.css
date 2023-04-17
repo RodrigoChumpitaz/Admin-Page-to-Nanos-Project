@@ -270,9 +270,9 @@ button:hover {
   margin: 0;
 }
 
-.pending, .paid, .toDelivery, .invalid, .send{
+.pending, .paid, .toDelivery, .invalid, .send, .description{
   margin: 0;
-  width: 60%;
+  width: 65%;
   text-align: center;
   border-radius: 14px;
 }
@@ -291,6 +291,10 @@ button:hover {
 }
 .send{
   background-color: #1da1f2;
+}
+.description{
+  color: #f2f2f2;
+  background-color: #333333;
 }
 
 td{

@@ -43,7 +43,6 @@ export class LocalAddEditComponent implements OnInit {
    }
 
    addEditLocal(){
-    console.log(this.formLocal.value)
     const modelo: RegistrarlocalI = {
       _id: this.formLocal.value.id,
       telefono: this.formLocal.value.telefono,
@@ -55,7 +54,6 @@ export class LocalAddEditComponent implements OnInit {
 
       this._localServicio.registrar(modelo,token).subscribe({
       next: (data)=>{
-        console.log(data)
         const Toast = Swal.mixin({
           toast: true,
           position: 'top-end',
@@ -80,7 +78,6 @@ export class LocalAddEditComponent implements OnInit {
       console.log(this.dataLocal);
       this._localServicio.update(modelo,this.dataLocal._id, token).subscribe({
       next: (data)=>{
-        console.log(data)
         const Toast = Swal.mixin({
           toast: true,
           position: 'top-end',

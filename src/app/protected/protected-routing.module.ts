@@ -9,6 +9,7 @@ import { CategoriaComponent } from './categoria/categoria.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
 import { UsuarioComponent } from './usuario/usuario.component';
 import { AuthGuard } from '../guards/auth.guard';
+import { RecibosComponent } from './recibos/recibos.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,7 @@ const routes: Routes = [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'pedidos', component: PedidosComponent },
       { path: 'carta', component:CartaComponent},
+      { path: 'recibos', component:RecibosComponent},
       { path: 'locales', component:LocalesComponent},
       { path: 'categoria', component:CategoriaComponent},
       {path: 'usuario', component:UsuarioComponent},

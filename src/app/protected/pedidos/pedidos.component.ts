@@ -4,6 +4,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { PedidosInterface } from 'src/app/auth/interfaces/pedidos.interface';
 import { PedidosService } from 'src/app/auth/services/pedidos.service';
 import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-pedidos',
@@ -20,15 +21,17 @@ import { DetallePedidoComponent } from './detalle-pedido/detalle-pedido.componen
 export class PedidosComponent implements OnInit {
 
   progress = 0;
-  displayedColumns: string[] = ['client','deliveryDate','status','imgPrueba','observation','acciones'];
+  displayedColumns: string[] = ['client','deliveryDate','status','saleType','imgPrueba','observation','acciones'];
   token: string = localStorage.getItem('token')!;
   dataSource!: MatTableDataSource<PedidosInterface>;
-  // formatInactive: string  = 'pending';
 
   constructor(private orderService: PedidosService, private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.getPedidos();
+    this.orderService.PedidoActualizado$.subscribe(data => {
+      this.getPedidos();
+    })
   }
 
   getPedidos(){
@@ -67,7 +70,54 @@ export class PedidosComponent implements OnInit {
     if(state === 'Entregado'){
       return 'send'
     }
+    if(state === 'presencial' || state === 'delivery'){
+      return 'description'
+    }
+
     return 'invalid';
+  }
+
+  invalidOrder(id: string){
+    Swal.fire({
+      title: '¿Estás seguro?',
+      text: "¿Quieres invalidar este pedido?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.orderService.cancelOrder(id)
+        .subscribe({
+          next: (data: any) => {
+            const Toast1 = Swal.mixin({
+              toast: true,
+              position: 'top-end',
+              showConfirmButton: false,
+              timer: 5000,
+              timerProgressBar: true,
+              didOpen: (toast) => {
+                toast.addEventListener('mouseenter', Swal.stopTimer)
+                toast.addEventListener('mouseleave', Swal.resumeTimer)
+              }
+            })
+            Toast1.fire({
+              icon: 'info',
+              title: data.message,
+            })
+          },
+          error: (err: any) => {
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: err.error.message,
+            })
+          }
+        })
+      }
+    })
+
   }
 
 }

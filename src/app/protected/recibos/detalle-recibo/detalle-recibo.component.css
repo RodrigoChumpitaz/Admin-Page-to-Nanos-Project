@@ -1,0 +1,22 @@
+.text-center{
+  text-align: center;
+}
+.bg{
+  background-color: #e3572c;
+  /* margin: 20px 0 20px 0; */
+  border-radius: 20px;
+}
+
+.card{
+  background-color: #eeeeee;
+  padding: 10px 0 10px 0;
+  padding-left: 32px;
+}
+
+.container{
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 30px;
+}

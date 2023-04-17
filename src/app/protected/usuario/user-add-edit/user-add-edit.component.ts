@@ -38,7 +38,6 @@ export class UserAddEditComponent implements OnInit {
 
    addEditUsuario(){
 
-    console.log(this.formUsuario.value)
     const modelo: Data ={
       _id: this.formUsuario.value.id,
       name: this.formUsuario.value.name,
@@ -70,6 +69,14 @@ export class UserAddEditComponent implements OnInit {
             title: 'se añadio un nuevo usuario'
           })
           this.dialog.closeAll();
+        },
+        error: (err) =>{
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: err.error.msg,
+            footer: '<a href>Why do I have this issue?</a>'
+          })
         }
       })
     }else{
@@ -99,7 +106,6 @@ export class UserAddEditComponent implements OnInit {
       }
     })
     }
-    // console.log(this.formUsuario.value.roles)
   }
 
   ngOnInit(): void {

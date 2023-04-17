@@ -42,7 +42,7 @@ export class CategoriaEditComponent implements OnInit {
     console.log(this.formularioEdit.value.slug);
     this._categoriaService.editar(formData,this.dataCat.slug,this.token)
       .subscribe({
-        next: (rs) => {
+        next: (rs: any) => {
           console.log(rs);
           const Toast = Swal.mixin({
             toast: true,
@@ -58,11 +58,17 @@ export class CategoriaEditComponent implements OnInit {
 
           Toast.fire({
             icon: 'success',
-            title: 'Se editó la Categoria Seleccionada'
+            title: rs.message
           })
           this.dialog.closeAll();
         },
-        error: err => console.log(err)
+        error: err => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: err.error.message,
+          })
+        }
       })
   }
 

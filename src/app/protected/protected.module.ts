@@ -45,6 +45,8 @@ import { DetallePedidoComponent } from './pedidos/detalle-pedido/detalle-pedido.
 import { UsuarioComponent } from './usuario/usuario.component';
 import { UserAddEditComponent } from './usuario/user-add-edit/user-add-edit.component';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { RecibosComponent } from './recibos/recibos.component';
+import { DetalleReciboComponent } from './recibos/detalle-recibo/detalle-recibo.component';
 
 
 
@@ -68,6 +70,8 @@ import { NgxChartsModule } from '@swimlane/ngx-charts';
     DetallePedidoComponent,
     UsuarioComponent,
     UserAddEditComponent,
+    RecibosComponent,
+    DetalleReciboComponent,
   ],
   imports: [
     CommonModule,

@@ -32,7 +32,6 @@ export class CartaEditComponent implements OnInit {
 
 
   @ViewChild("cartImage") cartImage!: ElementRef<HTMLInputElement>;
-  // @ViewChild("category1") category1!: ElementRef<HTMLInputElement> | any;
 
 
   constructor(private cartaService :CartaService,private categoriaService :CategoriaService,
@@ -65,9 +64,6 @@ export class CartaEditComponent implements OnInit {
     formData.append('description', this.formularioEdit.value.description as any);
     formData.append('price' , this.formularioEdit.value.price as any);
     formData.append('category', this.formularioEdit.value.category as any);
-    // console.log(this.category1._elementRef.nativeElement.outerText)
-    // console.log(this.category1)
-    // console.log(this.category1._value.name)
     console.log(this.formularioEdit.value._id);
     this.cartaService.editar(formData,this.token)
       .subscribe({
@@ -147,7 +143,13 @@ export class CartaEditComponent implements OnInit {
       next: (data) =>{
         this.categoriaList=data
       },
-      error: (err) => console.log(err)
+      error: (err) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: err.error.message,
+        })
+      }
     })
   }
 

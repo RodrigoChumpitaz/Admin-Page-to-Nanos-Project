@@ -4,6 +4,7 @@ export interface PedidosInterface {
   deliveryDate: Date;
   imgPrueba:    string;
   observation:  string;
+  saleType:     string;
   status:       string;
   orderDetail:  OrderDetail[];
   slug:         string;

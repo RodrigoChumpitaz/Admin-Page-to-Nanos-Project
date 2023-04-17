@@ -93,11 +93,14 @@ export class CartaComponent implements OnInit {
               title: 'Se habilito la Carta Seleccionada',
             })
           }
-          // this.router.navigateByUrl('/',{skipLocationChange:true}).then( async ()=>{
-          //   await this.router.navigate([`/${url}`])
-          // })
         },
-        error: (err: any) => console.log(err.headers)
+        error: (err: Error) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: err.message,
+          })
+        }
       })
   }
 

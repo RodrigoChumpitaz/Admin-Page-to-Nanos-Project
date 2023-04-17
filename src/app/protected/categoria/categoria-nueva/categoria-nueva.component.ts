@@ -35,12 +35,9 @@ export class CategoriaNuevaComponent implements OnInit {
     }
     formData.append('description', this.description);
     const token: string = localStorage.getItem('token')!;
-    console.log(formData.get("description"))
-    console.log(token)
     this._categoriaService.registrar(formData,token)
     .subscribe({
-      next: (data) =>{
-        console.log(data);
+      next: (data: any) =>{
         const Toast = Swal.mixin({
           toast: true,
           position: 'top-end',
@@ -52,19 +49,20 @@ export class CategoriaNuevaComponent implements OnInit {
             toast.addEventListener('mouseleave', Swal.resumeTimer)
           }
         })
-        
+
         Toast.fire({
           icon: 'success',
-          title: 'Se añadio una nueva Categoria'
+          title: data.msg
         })
         this.dialog.closeAll();
       },
-      error: (err) => {
+      error: (err: any) => {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Todos los campos son requeridos!',
+          text: err.error.message,
         })
+        console.log(err)
       }
     })
   }

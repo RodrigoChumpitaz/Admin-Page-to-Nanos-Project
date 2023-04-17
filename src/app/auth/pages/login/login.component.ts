@@ -27,15 +27,13 @@ export class LoginComponent implements OnInit{
     this.authService.login(email,password)
       .subscribe({
         next: (resp: AuthResponse) => {
-          console.log(resp);
           localStorage.setItem('token', resp.token);
           this.token = resp.token;
           this.authService.getProfile(this.token)
             .subscribe({
               next: (resp) => {
-                // console.log(resp);
                 const userRol = resp.roles[0].rol;
-                if(userRol === 'admin'){
+                if(userRol === 'admin' || userRol === 'moderator'){
                   const Toast = Swal.mixin({
                     toast: true,
                     position: 'top-end',
@@ -70,7 +68,6 @@ export class LoginComponent implements OnInit{
                     icon: 'error',
                     title: 'No eres administrador'
                   })
-                  console.log("No eres un usuario administrador");
                 }
               },
               error: (err) => {
