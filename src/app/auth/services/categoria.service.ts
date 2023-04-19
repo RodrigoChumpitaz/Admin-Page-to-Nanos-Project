@@ -2,12 +2,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
 import { CategoriaI } from '../interfaces/categoria.interface';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CategoriaService {
-  private url:string = "http://localhost:3500";
+  private url: string = environment.baseUrl;
   private dataUpdated = new Subject<boolean>(); // necesario para observable
 
 

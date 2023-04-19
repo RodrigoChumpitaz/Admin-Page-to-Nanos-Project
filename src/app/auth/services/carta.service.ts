@@ -2,12 +2,13 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, Subject, tap } from 'rxjs';
 import { Carta } from '../interfaces/carta.interface';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartaService {
-  private url:string = "http://localhost:3500";
+  private url: string = environment.baseUrl;
   private dataUpdated = new Subject<boolean>(); // necesario para observable
 
   constructor(private http:HttpClient) { }
@@ -58,7 +59,7 @@ export class CartaService {
   get cartaActualizada$(): Observable<boolean>{ // necesario para tomar los datos nuevos
     return this.dataUpdated.asObservable();
   }
-  
+
 }
 
 

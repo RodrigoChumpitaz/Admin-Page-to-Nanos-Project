@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseUrl: 'http://localhost:3500'
+  baseUrl: 'https://a-osrestapi-production.up.railway.app'
 };
 
 /*
