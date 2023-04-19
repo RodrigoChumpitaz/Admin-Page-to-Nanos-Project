@@ -14,12 +14,12 @@ export class RecibosService {
   constructor(private http: HttpClient) { }
 
   getRecibos(){
-    const url: string = `${this.baseUrl}/sales-receipts/generated-receipt`;
+    const url: string = `${this.baseUrl}/sales-receipts/get-receipts`;
     return this.http.get<ReceiptsResponse[]>(url);
   }
 
   getReciboPorId(id: string){
-    const url: string = `${this.baseUrl}/sales-receipts/generated-receipt/${id}`;
+    const url: string = `${this.baseUrl}/sales-receipts/get-receipt/${id}`;
     return this.http.get(url);
   }
 

@@ -53,3 +53,33 @@ export interface Client {
   id:    string;
   email: string;
 }
+
+
+
+export interface PDFReceiptResponse {
+  _id:           string;
+  paymentCode:   string;
+  order:         Order;
+  cartas:        Carta[];
+  igv:           number;
+  subtotal:      number;
+  discount:      number;
+  aditional:     number;
+  total:         string;
+  receiptNumber: number;
+  fecha_emision: string;
+}
+
+export interface Carta {
+  name:     string;
+  quantity: number;
+  price:    number;
+}
+
+export interface Order {
+  _id:     string;
+  _client: string;
+}
+
+
+

@@ -269,6 +269,9 @@ button:hover {
 .mat-typography h4{
   margin: 0;
 }
+.color{
+  color: rgb(0, 193, 236);
+}
 
 .pending, .paid, .toDelivery, .invalid, .send, .description{
   margin: 0;

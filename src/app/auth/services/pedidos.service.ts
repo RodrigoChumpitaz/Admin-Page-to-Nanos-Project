@@ -33,6 +33,17 @@ export class PedidosService {
         })
       )
   }
+
+  confimrOrder(id: string){
+    const url: string = `${this.baseUrl}/orders/confirmOrder/${id}`;
+    return this.http.patch(url, {})
+      .pipe(
+        tap(() => {
+          this.dataUpdated.next(true);
+        })
+      )
+  }
+
   get PedidoActualizado$(): Observable<boolean>{
     return this.dataUpdated.asObservable();
   }

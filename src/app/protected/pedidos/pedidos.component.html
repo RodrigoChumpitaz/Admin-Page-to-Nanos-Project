@@ -54,12 +54,16 @@
     <ng-container matColumnDef="acciones">
       <th mat-header-cell *matHeaderCellDef> Control </th>
       <td mat-cell *matCellDef="let element">
+        <button mat-icon-button class="color" (click)="confirmOrder(element._id)">
+          <mat-icon>check</mat-icon>
+        </button>
         <button mat-icon-button color="primary" (click)="showDetail(element)">
           <mat-icon>info</mat-icon>
         </button>
-        <button *ngIf="element.status != 'Invalidado'" mat-icon-button color="warn" (click)="invalidOrder(element._id)">
+        <button  mat-icon-button color="warn" (click)="invalidOrder(element._id)">
           <mat-icon>block</mat-icon>
         </button>
+        <!-- *ngIf="element.status != 'Invalidado'" -->
       </td>
     </ng-container>
 

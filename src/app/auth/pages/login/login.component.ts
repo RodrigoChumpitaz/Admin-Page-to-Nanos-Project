@@ -71,12 +71,12 @@ export class LoginComponent implements OnInit{
                 }
               },
               error: (err) => {
-                console.log(err);
+                Swal.fire('Error', err.error.msg, 'error');
               }
             })
         },
         error: (err) => {
-          console.log(err)
+          Swal.fire('Error', err.error.msg, 'error');
           localStorage.clear();
         }
       })

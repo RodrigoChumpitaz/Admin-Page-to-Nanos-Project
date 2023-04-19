@@ -77,6 +77,36 @@ export class PedidosComponent implements OnInit {
     return 'invalid';
   }
 
+  confirmOrder(id: string){
+    this.orderService.confimrOrder(id)
+      .subscribe({
+        next: (data: any) => {
+          const Toast1 = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 5000,
+            timerProgressBar: true,
+            didOpen: (toast) => {
+              toast.addEventListener('mouseenter', Swal.stopTimer)
+              toast.addEventListener('mouseleave', Swal.resumeTimer)
+            }
+          })
+          Toast1.fire({
+            icon: 'info',
+            title: data.message,
+          })
+        },
+        error: (err: any) => {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: err.error.message,
+          })
+        }
+      });
+  }
+
   invalidOrder(id: string){
     Swal.fire({
       title: '¿Estás seguro?',

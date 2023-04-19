@@ -3,8 +3,13 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
 import { RecibosService } from 'src/app/auth/services/recibos.service';
 import { DetallePedidoComponent } from '../pedidos/detalle-pedido/detalle-pedido.component';
-import { ReceiptsResponse } from 'src/app/auth/interfaces/recibos.interface';
+import { PDFReceiptResponse, ReceiptsResponse } from 'src/app/auth/interfaces/recibos.interface';
 import { DetalleReciboComponent } from './detalle-recibo/detalle-recibo.component';
+import pdfmake from 'pdfmake/build/pdfmake';
+import pdfFonts from 'pdfmake/build/vfs_fonts';
+import { pdfDefinition } from './pdf-definition';
+pdfmake.vfs = pdfFonts.pdfMake.vfs;
+
 
 @Component({
   selector: 'app-recibos',
@@ -66,4 +71,14 @@ export class RecibosComponent implements OnInit {
     return 'invalid';
   }
 
+
+  createPdf(id: string){
+    this.reciboService.getReciboPorId(id)
+      .subscribe({
+        next: (data: PDFReceiptResponse) => {
+          const pdf = pdfmake.createPdf(pdfDefinition(data));
+          pdf.open();
+        }
+      })
+  }
 }
